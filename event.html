@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUDO Events | مؤتمر وإطلاق المشاريع</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap');
+
+        :root {
+            --nude-bg: #f9f4ef;
+            --rose-gold: #b76e79;
+            --text-dark: #3a3532;
+            --card-white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--nude-bg);
+            color: var(--text-dark);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .event-container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card-white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid rgba(183, 110, 121, 0.15);
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 140px;
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--rose-gold);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #887;
+            margin-bottom: 20px;
+        }
+
+        /* تنسيق الرسالة الترحيبية */
+        .intro-text {
+            font-size: 1rem;
+            color: #554;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .section-box {
+            background: var(--nude-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .section-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--rose-gold);
+            border-bottom: 1px solid rgba(183, 110, 121, 0.2);
+            padding-bottom: 5px;
+        }
+
+        .section-box p, .section-box li {
+            font-size: 0.95rem;
+            color: #554;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .gps-btn {
+            display: inline-block;
+            background-color: var(--rose-gold);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .gps-btn:hover {
+            background-color: #9c5c66;
+        }
+
+        /* فورم الحضور */
+        .rsvp-form {
+            text-align: right;
+            margin-top: 30px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .rsvp-form h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            border: none;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Jost', sans-serif;
+            background-color: #faf8f5;
+        }
+
+        button.submit-btn {
+            background: linear-gradient(135deg, var(--rose-gold), #9c5c66);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            font-family: 'Jost', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(183, 110, 121, 0.3);
+        }
+
+        button.submit-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="event-container">
+        <!-- اللوجو ثابت فوق -->
+        <img src="logo.png" class="logo" alt="NUDO Logo">
+
+        <!-- القسم الأول: الرسالة التعريفية -->
+        <div id="intro-section">
+            <h1>NUDO Executive Event</h1>
+            <p class="subtitle">مستقبل التصميم الرقمي والابتكار</p>
+            <p class="intro-text">
+                يسعدنا انضمامكم إلى مؤتمرنا السنوي. لقاء حصري يجمع قادة الفكر والمصممين لاستعراض أحدث الابتكارات في عالم تنظيم الفعاليات الرقمية.
+            </p>
+            <button class="submit-btn" onclick="showDetails()">عرض تفاصيل المؤتمر وجدول الأعمال</button>
+        </div>
+
+        <!-- القسم الثاني: التفاصيل الكاملة (مخفي في البداية) -->
+        <div id="details-section" style="display: none;">
+            
+            <!-- تفاصيل الإيفنت وأهميته -->
+            <div class="section-box">
+                <h3>📌 نبذة عن الفعالية وأهميتها</h3>
+                <p>لقاء حصري يجمع قادة الفكر والمصممين لاستعراض أحدث الابتكارات في عالم تنظيم الفعاليات الرقمية والحلول التكنولوجية الحديثة.</p>
+            </div>
+
+            <!-- الموعد والمكان والـ GPS -->
+            <div class="section-box" style="text-align: center;">
+                <h3>📅 الموعد والمكان</h3>
+                <p><strong>التاريخ:</strong> 15 سبتمبر 2026</p>
+                <p><strong>الوقت:</strong> من الساعة 5:00 مساءً حتى 9:00 مساءً</p>
+                <p><strong>المكان:</strong> قاعة المؤتمرات الكبرى - القاهرة</p>
+                <a href="https://maps.app.goo.gl/example" target="_blank" class="gps-btn">📍 افتح موقع القاعة على GPS</a>
+            </div>
+
+            <!-- المتحدثون -->
+            <div class="section-box">
+                <h3>🎤 المتحدثون الرسميون</h3>
+                <ul>
+                    <li>✨ <strong>مهندسة ريتال لبيب:</strong> خبيرة التكنولوجيا والابتكار الرقمي.</li>
+                    <li>✨ <strong>نخبة من رواد الأعمال:</strong> في قطاع التصميم وإدارة المشاريع.</li>
+                </ul>
+            </div>
+
+            <!-- خطة اليوم -->
+            <div class="section-box">
+                <h3>⏰ خطة وجدول اليوم</h3>
+                <ul>
+                    <li><strong>17:00 - 17:30:</strong> استقبال الضيوف وتسجيل الحضور.</li>
+                    <li><strong>17:30 - 19:00:</strong> الجلسة الرئيسية وحلقة النقاش.</li>
+                    <li><strong>19:00 - 20:00:</strong> ورشة عمل تفاعلية عرض مشاريع NUDO.</li>
+                    <li><strong>20:00 - 21:00:</strong> مأدبة عشاء خفيفة وشبكة علاقات (Networking).</li>
+                </ul>
+            </div>
+
+            <!-- نموذج تسجيل الحضور المرتبط بـ Formspree -->
+            <div class="rsvp-form">
+                <h3>سجل حضورك الآن 📋</h3>
+                <form action="https://formspree.io/f/mqpzyqvo" method="POST">
+                    <input type="text" name="name" placeholder="اسمك الكريم..." required>
+                    <input type="email" name="email" placeholder="بريدك الإلكتروني..." required>
+                    <input type="text" name="phone" placeholder="رقم الهاتف (اختياري)...">
+                    <textarea name="notes" rows="2" placeholder="هل لديك أي استفسار خاص؟"></textarea>
+                    <button type="submit" class="submit-btn">تأكيد وإرسال الحضور</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- كود الجافا سكريبت اللي بينقل من الترحيب للتفاصيل -->
+    <script>
+        function showDetails() {
+            // إخفاء قسم الترحيب
+            document.getElementById('intro-section').style.display = 'none';
+            // إظهار قسم التفاصيل بسلاسة
+            document.getElementById('details-section').style.display = 'block';
+            // رفع الشاشة لفوق عشان الضيف يبدأ يقرا من أول التفاصيل
+            window.scrollTo(0, 0); 
+        }
+    </script>
+</body>
+</html>

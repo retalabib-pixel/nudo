@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة زفاف | أحمد ونور</title>
+
+  <!-- الخطوط الملكية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- مكتبة الكونفيتي (ورق الزينة) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F3E5AB;
+      --white: #FFFFFF;
+      --off-white: #F9F6F0;
+      --text-dark: #2B2B2B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--off-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ---------------- الافتتاحية الملكية (البوابات) ---------------- */
+    #intro-screen {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--off-white);
+    }
+
+    .door {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background-color: var(--white);
+      border: 5px solid var(--gold);
+      transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+      background-image: 
+        linear-gradient(45deg, transparent 45%, var(--gold-light) 45%, var(--gold-light) 55%, transparent 55%);
+      background-size: 60px 60px;
+      opacity: 0.2;
+    }
+    
+    .door-solid {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background-color: var(--white);
+      border-right: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+      transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .door-left { left: 0; transform-origin: left; }
+    .door-right { right: 0; transform-origin: right; border-left: none; }
+
+    .seal {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+      border: 4px solid #fff;
+      z-index: 10;
+      transition: opacity 0.5s, transform 0.3s;
+      animation: pulse 2s infinite;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .seal:hover { transform: scale(1.05); }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+    }
+
+    .open .door-left { transform: translateX(-100%); }
+    .open .door-right { transform: translateX(100%); }
+    .open .seal { opacity: 0; pointer-events: none; }
+
+    /* ---------------- المحتوى الداخلي ---------------- */
+    #main-content {
+      opacity: 0;
+      transition: opacity 1.5s ease-in;
+      padding: 50px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .show-content { 
+      opacity: 1 !important; 
+      display: block !important;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--gold);
+      border-radius: 20px;
+      padding: 40px 20px;
+      margin-bottom: 40px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 10px; left: 10px; right: 10px; bottom: 10px;
+      border: 1px dashed var(--gold);
+      border-radius: 15px;
+      pointer-events: none;
+    }
+
+    .title-royal {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 4.5rem;
+      color: var(--gold);
+      margin: 20px 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    /* ---------------- العداد ---------------- */
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .count-box {
+      background: var(--off-white);
+      border: 1px solid var(--gold-light);
+      padding: 15px;
+      border-radius: 12px;
+    }
+
+    .count-box .number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .count-box .label { color: var(--gold); font-weight: 600; }
+
+    /* ---------------- الصور والخريطة ---------------- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--gold-light);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 300px;
+      border-radius: 10px;
+      border: 2px solid var(--gold);
+    }
+
+    /* ---------------- الأزرار والنموذج ---------------- */
+    .btn {
+      background: linear-gradient(135deg, #D4AF37, #AA771C);
+      color: #fff;
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      transition: all 0.3s;
+    }
+
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6); }
+
+    .rsvp-form input, .rsvp-form select {
+      width: 90%;
+      max-width: 400px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      font-family: 'Cairo', sans-serif;
+      outline: none;
+      display: block;
+      margin-left: auto; margin-right: auto;
+    }
+
+    .success-message {
+      display: none;
+      color: #2c5e3b;
+      background: #e8f5e9;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #c8e6c9;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .title-royal { font-size: 3rem; }
+      .countdown-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- رابط الصوت المباشر من الإنترنت -->
+  <audio id="zaghroutaAudio" src="https://www.myinstants.com/media/sounds/zaghrouta.mp3" crossorigin="anonymous" preload="auto"></audio>
+
+  <!-- الافتتاحية الملكية (بوابات الدعوة) -->
+  <div id="intro-screen">
+    <div class="door-solid door-left"></div>
+    <div class="door-solid door-right"></div>
+    <div class="seal" onclick="openGate()">افتح<br>الدعوة</div>
+  </div>
+
+  <!-- المحتوى الرئيسي -->
+  <div id="main-content">
+    
+    <!-- الكارت الأول: الأسماء -->
+    <div class="card">
+      <h3 style="color: var(--gold); font-size: 1.2rem;">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</h3>
+      <h1 class="title-royal">أحمد & نور</h1>
+      <p style="font-size: 1.2rem; font-weight: 600;">نتشرف بدعوتكم لمشاركتنا أجمل ليالي العمر</p>
+    </div>
+
+    <!-- الكارت الثاني: العداد -->
+    <div class="card">
+      <h2 class="section-title">العد التنازلي للفرحة</h2>
+      <div class="countdown-grid">
+        <div class="count-box"><div class="number" id="days">00</div><div class="label">يوم</div></div>
+        <div class="count-box"><div class="number" id="hours">00</div><div class="label">ساعة</div></div>
+        <div class="count-box"><div class="number" id="minutes">00</div><div class="label">دقيقة</div></div>
+        <div class="count-box"><div class="number" id="seconds">00</div><div class="label">ثانية</div></div>
+      </div>
+    </div>
+
+    <!-- الكارت الثالث: الصور -->
+    <div class="card">
+      <h2 class="section-title">لحظاتنا</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80" alt="صورة 1"></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="صورة 2"></div>
+      </div>
+    </div>
+
+    <!-- الكارت الرابع: الخريطة -->
+    <div class="card">
+      <h2 class="section-title">موقع الحفل (GPS)</h2>
+      <p style="margin-bottom: 20px;">القاعة الملكية، فندق الماسة</p>
+      <div class="map-container" style="margin-bottom: 20px;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113943.43486161427!2d31.63665389657497!3d26.559074099999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- الكارت الخامس: تأكيد الحضور (الزغروتة هنا) -->
+    <div class="card">
+      <h2 class="section-title">تأكيد الحضور (RSVP)</h2>
+      <form id="rsvpForm" class="rsvp-form">
+        <input type="text" id="guestName" placeholder="الاسم الكريم" required />
+        <select required>
+          <option value="" disabled selected>عدد الأفراد</option>
+          <option value="1">شخص واحد</option>
+          <option value="2">شخصين</option>
+          <option value="3">عائلة</option>
+        </select>
+        <button type="submit" class="btn">تأكيد الحضور 🤍</button>
+      </form>
+      <div id="successMsg" class="success-message">
+        يا ألف نهار أبيض! 🎉 زادت فرحتنا بوجودك يا <span id="displayName"></span>.
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. حركة فتح البوابات
+    function openGate() {
+      document.getElementById('intro-screen').classList.add('open');
+      setTimeout(() => {
+        document.getElementById('intro-screen').style.display = 'none';
+        document.getElementById('main-content').classList.add('show-content');
+      }, 1500);
+    }
+
+    // 2. العداد التنازلي
+    const weddingDate = new Date("October 15, 2026 20:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = weddingDate - now;
+      if (diff > 0) {
+        document.getElementById("days").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById("hours").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById("minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById("seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }, 1000);
+
+    // 3. تأكيد الحضور والزغروتة
+    document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById("guestName").value;
+      document.getElementById("displayName").textContent = name;
+      
+      // إخفاء الفورم وإظهار رسالة الترحيب
+      this.style.display = "none";
+      document.getElementById("successMsg").style.display = "block";
+
+      // تشغيل الكونفيتي
+      confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 }, colors: ['#D4AF37', '#FFFFFF'] });
+
+      // تشغيل الزغروتة من الرابط المباشر
+      const audio = document.getElementById("zaghroutaAudio");
+      audio.play().catch(err => {
+        console.log("صوت الزغروتة محتاج تفاعل مباشر أو الرابط اتأخر في التحميل: ", err);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1082,56 +1082,8 @@ footer > p,
     </p>
   </div>
 
-  <div class="featured-grid">
-
-    <a href="rere.html" class="invite-card reveal">
-      <div class="invite-preview invite-preview--wedding-cinematic">
-        <span class="invite-tag">Wedding · Cinematic</span>
-        <div class="preview-names">Lina &amp; Adam</div>
-      </div>
-      <div class="invite-body">
-        <h3>Lina &amp; Adam</h3>
-        <p>A full cinematic journey — opening sequence, animated envelope, story timeline, and confetti RSVP.</p>
-        <span class="invite-link">View invitation →</span>
-      </div>
-    </a>
-
-    <a href="wedding-omar-nour.html" class="invite-card reveal">
-      <div class="invite-preview invite-preview--wedding-classic">
-        <span class="invite-tag">Wedding · Classic</span>
-        <div class="preview-envelope"><div class="preview-seal">N</div></div>
-      </div>
-      <div class="invite-body">
-        <h3>Omar &amp; Nour</h3>
-        <p>Elegant envelope reveal with countdown, guest wishes, RSVP, and bilingual Arabic–English content.</p>
-        <span class="invite-link">View invitation →</span>
-      </div>
-    </a>
-
-    <a href="Dr.html" class="invite-card reveal">
-      <div class="invite-preview invite-preview--graduation">
-        <span class="invite-tag invite-tag--dark">Graduation · Archive</span>
-        <div class="preview-names preview-names--light">Mahmoud<br>Labib</div>
-      </div>
-      <div class="invite-body">
-        <h3>Dr. Mahmoud Labib</h3>
-        <p>A dark editorial archive — memory wall, video vault, anatomy cards, and a white-coat reveal.</p>
-        <span class="invite-link">View invitation →</span>
-      </div>
-    </a>
-
-    <a href="event.html" class="invite-card reveal">
-      <div class="invite-preview invite-preview--event">
-        <span class="invite-tag">Corporate · Event</span>
-        <div class="preview-event-title">NUDO Executive Event</div>
-      </div>
-      <div class="invite-body">
-        <h3>Executive Conference</h3>
-        <p>Arabic RTL corporate event page with agenda, speakers, and live RSVP via Formspree integration.</p>
-        <span class="invite-link">View invitation →</span>
-      </div>
-    </a>
-
+  <div class="featured-grid" id="invitations-grid">
+    <!-- سيتم إضافة الكروت هنا تلقائياً بواسطة JavaScript -->
   </div>
 </section>
 
@@ -1227,6 +1179,78 @@ document.querySelectorAll(".mobile-link").forEach(link => {
     document.body.style.overflow = "";
   });
 });
+
+/* ── AUTO-GENERATE INVITATIONS ── */
+const invitationsData = [
+  {
+    url: "rere.html",
+    previewClass: "invite-preview--wedding-cinematic",
+    tag: "Wedding · Cinematic",
+    tagClass: "",
+    previewVisual: '<div class="preview-names">Lina &amp; Adam</div>',
+    title: "Lina &amp; Adam",
+    desc: "A full cinematic journey — opening sequence, animated envelope, story timeline, and confetti RSVP."
+  },
+  {
+    url: "wedding-omar-nour.html",
+    previewClass: "invite-preview--wedding-classic",
+    tag: "Wedding · Classic",
+    tagClass: "",
+    previewVisual: '<div class="preview-envelope"><div class="preview-seal">N</div></div>',
+    title: "Omar &amp; Nour",
+    desc: "Elegant envelope reveal with countdown, guest wishes, RSVP, and bilingual Arabic–English content."
+  },
+  {
+    url: "Dr.html",
+    previewClass: "invite-preview--graduation",
+    tag: "Graduation · Archive",
+    tagClass: "invite-tag--dark",
+    previewVisual: '<div class="preview-names preview-names--light">Mahmoud<br>Labib</div>',
+    title: "Dr. Mahmoud Labib",
+    desc: "A dark editorial archive — memory wall, video vault, anatomy cards, and a white-coat reveal."
+  },
+  {
+    url: "event.html",
+    previewClass: "invite-preview--event",
+    tag: "Corporate · Event",
+    tagClass: "",
+    previewVisual: '<div class="preview-event-title">NUDO Executive Event</div>',
+    title: "Executive Conference",
+    desc: "Arabic RTL corporate event page with agenda, speakers, and live RSVP via Formspree integration."
+  },
+  {
+    url: "wedding.html",
+    previewClass: "invite-preview--wedding-classic",
+    tag: "Wedding · Royal",
+    tagClass: "",
+    previewVisual: '<div class="preview-names">أحمد &amp; نور</div>',
+    title: "أحمد &amp; نور",
+    desc: "دعوة زفاف بتصميم ملكي، تحتوي على بوابات ترحيبية تفاعلية، عداد تنازلي، ودفتر تهاني للعروسين."
+  }
+];
+
+const gridContainer = document.getElementById("invitations-grid");
+
+function renderInvitations() {
+  invitationsData.forEach(inv => {
+    const cardHTML = `
+      <a href="${inv.url}" class="invite-card reveal">
+        <div class="invite-preview ${inv.previewClass}">
+          <span class="invite-tag ${inv.tagClass}">${inv.tag}</span>
+          ${inv.previewVisual}
+        </div>
+        <div class="invite-body">
+          <h3>${inv.title}</h3>
+          <p>${inv.desc}</p>
+          <span class="invite-link">View invitation →</span>
+        </div>
+      </a>
+    `;
+    gridContainer.insertAdjacentHTML('beforeend', cardHTML);
+  });
+}
+
+renderInvitations();
 
 /* ── SCROLL REVEAL ── */
 const revealEls = document.querySelectorAll(".reveal");

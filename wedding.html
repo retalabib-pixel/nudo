@@ -201,7 +201,7 @@
       border: 2px solid var(--gold);
     }
 
-    /* ---------------- الأزرار والنموذج ---------------- */
+    /* ---------------- الأزرار والنموذج (دفتر التهاني) ---------------- */
     .btn {
       background: linear-gradient(135deg, #D4AF37, #AA771C);
       color: #fff;
@@ -219,28 +219,68 @@
 
     .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6); }
 
-    .rsvp-form input, .rsvp-form select {
+    .guestbook-form input, .guestbook-form textarea {
       width: 90%;
-      max-width: 400px;
+      max-width: 450px;
       padding: 15px;
       margin-bottom: 15px;
       border-radius: 10px;
       border: 1px solid var(--gold);
       font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
       outline: none;
       display: block;
       margin-left: auto; margin-right: auto;
+      background: var(--off-white);
     }
 
-    .success-message {
-      display: none;
-      color: #2c5e3b;
-      background: #e8f5e9;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid #c8e6c9;
-      font-weight: 700;
-      margin-top: 20px;
+    .guestbook-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* ---------------- شكل الرسائل المحفوظة ---------------- */
+    .messages-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .message-box {
+      background: var(--white);
+      border: 1px solid var(--gold-light);
+      padding: 15px 20px;
+      border-radius: 12px;
+      text-align: right;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .message-box::before {
+      content: '❝';
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 2rem;
+      color: var(--gold-light);
+      opacity: 0.5;
+    }
+
+    .message-name {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    .message-text {
+      color: var(--text-dark);
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     @media (max-width: 600px) {
@@ -251,8 +291,8 @@
 </head>
 <body>
 
-  <!-- رابط الصوت المباشر من الإنترنت -->
-  <audio id="zaghroutaAudio" src="https://www.myinstants.com/media/sounds/zaghrouta.mp3" crossorigin="anonymous" preload="auto"></audio>
+  <!-- ملف الزغروتة الحقيقي اللي حملتيه -->
+  <audio id="zaghroutaAudio" src="zaghrouta.mp3" preload="auto"></audio>
 
   <!-- الافتتاحية الملكية (بوابات الدعوة) -->
   <div id="intro-screen">
@@ -264,14 +304,12 @@
   <!-- المحتوى الرئيسي -->
   <div id="main-content">
     
-    <!-- الكارت الأول: الأسماء -->
     <div class="card">
       <h3 style="color: var(--gold); font-size: 1.2rem;">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</h3>
       <h1 class="title-royal">أحمد & نور</h1>
       <p style="font-size: 1.2rem; font-weight: 600;">نتشرف بدعوتكم لمشاركتنا أجمل ليالي العمر</p>
     </div>
 
-    <!-- الكارت الثاني: العداد -->
     <div class="card">
       <h2 class="section-title">العد التنازلي للفرحة</h2>
       <div class="countdown-grid">
@@ -282,7 +320,6 @@
       </div>
     </div>
 
-    <!-- الكارت الثالث: الصور -->
     <div class="card">
       <h2 class="section-title">لحظاتنا</h2>
       <div class="gallery-grid">
@@ -291,7 +328,6 @@
       </div>
     </div>
 
-    <!-- الكارت الرابع: الخريطة -->
     <div class="card">
       <h2 class="section-title">موقع الحفل (GPS)</h2>
       <p style="margin-bottom: 20px;">القاعة الملكية، فندق الماسة</p>
@@ -300,22 +336,19 @@
       </div>
     </div>
 
-    <!-- الكارت الخامس: تأكيد الحضور (الزغروتة هنا) -->
+    <!-- كارت دفتر التهاني الجديد -->
     <div class="card">
-      <h2 class="section-title">تأكيد الحضور (RSVP)</h2>
-      <form id="rsvpForm" class="rsvp-form">
+      <h2 class="section-title">سيبوا رسالة حلوة للعروسين 🤍</h2>
+      <p style="color: var(--text-dark); margin-bottom: 20px;">كلماتكم هتفضل ذكرى جميلة في يومنا</p>
+      
+      <form id="guestbookForm" class="guestbook-form">
         <input type="text" id="guestName" placeholder="الاسم الكريم" required />
-        <select required>
-          <option value="" disabled selected>عدد الأفراد</option>
-          <option value="1">شخص واحد</option>
-          <option value="2">شخصين</option>
-          <option value="3">عائلة</option>
-        </select>
-        <button type="submit" class="btn">تأكيد الحضور 🤍</button>
+        <textarea id="guestMessage" placeholder="اكتب رسالتك وتهنئتك للعروسين هنا..." required></textarea>
+        <button type="submit" class="btn">إرسال التهنئة ✨</button>
       </form>
-      <div id="successMsg" class="success-message">
-        يا ألف نهار أبيض! 🎉 زادت فرحتنا بوجودك يا <span id="displayName"></span>.
-      </div>
+
+      <!-- هنا هتظهر الرسائل المحفوظة -->
+      <div id="messagesList" class="messages-container"></div>
     </div>
 
   </div>
@@ -343,26 +376,58 @@
       }
     }, 1000);
 
-    // 3. تأكيد الحضور والزغروتة
-    document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    // 3. نظام دفتر التهاني (حفظ وعرض الرسائل)
+    const form = document.getElementById("guestbookForm");
+    const messagesContainer = document.getElementById("messagesList");
+
+    // جلب الرسائل المحفوظة من المتصفح (لو مفيش بيعمل مصفوفة فاضية)
+    let savedMessages = JSON.parse(localStorage.getItem("weddingMessages")) || [];
+
+    // دالة عشان تعرض الرسائل في الصفحة
+    function renderMessages() {
+      messagesContainer.innerHTML = ""; // تنظيف المكان
+      // بنعرض الرسائل الجديدة الأول (من الأحدث للأقدم)
+      [...savedMessages].reverse().forEach(msg => {
+        const msgDiv = document.createElement("div");
+        msgDiv.className = "message-box";
+        msgDiv.innerHTML = `
+          <div class="message-name">${msg.name}</div>
+          <div class="message-text">${msg.text}</div>
+        `;
+        messagesContainer.appendChild(msgDiv);
+      });
+    }
+
+    // عرض الرسائل أول ما الصفحة تفتح
+    renderMessages();
+
+    // لما حد يدوس "إرسال التهنئة"
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // منع الصفحة تعمل ريفرش
       
       const name = document.getElementById("guestName").value;
-      document.getElementById("displayName").textContent = name;
+      const text = document.getElementById("guestMessage").value;
       
-      // إخفاء الفورم وإظهار رسالة الترحيب
-      this.style.display = "none";
-      document.getElementById("successMsg").style.display = "block";
+      // حفظ الرسالة الجديدة
+      savedMessages.push({ name: name, text: text });
+      localStorage.setItem("weddingMessages", JSON.stringify(savedMessages));
+      
+      // تحديث العرض عشان الرسالة الجديدة تظهر فوراً
+      renderMessages();
 
       // تشغيل الكونفيتي
       confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 }, colors: ['#D4AF37', '#FFFFFF'] });
 
-      // تشغيل الزغروتة من الرابط المباشر
+      // تشغيل الزغروتة الحقيقية
       const audio = document.getElementById("zaghroutaAudio");
       audio.play().catch(err => {
-        console.log("صوت الزغروتة محتاج تفاعل مباشر أو الرابط اتأخر في التحميل: ", err);
+        console.log("تأكدي من وجود ملف zaghrouta.mp3", err);
       });
+
+      // تفريغ الفورم عشان يبقى جاهز لرسالة تانية
+      form.reset();
     });
+    
   </script>
 </body>
 </html>

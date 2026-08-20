@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف | Mohamed & Amira</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Great+Vibes&family=Tajawal:wght@400;500;700&family=Amiri:ital@1&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============ الإعدادات العامة ============ */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif; 
+            /* خلفية الصفحة: ستظهر بكامل ألوانها */
+            background-image: url('bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #fcf8f2;
+            color: #4a3b32; /* بني داكن وأنيق للنصوص */
+            overflow-x: hidden;
+        }
+
+        /* ============ بوابة القصر (شاشة البداية) ============ */
+        #gate-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a110c; /* خلفية داكنة خلف البوابة */
+            overflow: hidden;
+            transition: opacity 1s ease-in-out 1.2s; /* الشاشة تتلاشى بعد فتح الباب */
+        }
+
+        /* تصميم البوابة (الضلف) */
+        .gate {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            /* لون خشبي/معدني فخم */
+            background: linear-gradient(135deg, #3e2723, #1f110c);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+            transition: transform 1.5s cubic-bezier(0.64, 0.04, 0.35, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2005;
+        }
+
+        .gate-left {
+            left: 0;
+            border-right: 4px solid #d4af37; /* حافة ذهبية */
+        }
+
+        .gate-right {
+            right: 0;
+            border-left: 4px solid #d4af37; /* حافة ذهبية */
+        }
+
+        /* نقوش وإطارات داخلية على البوابة */
+        .gate::before {
+            content: '';
+            position: absolute;
+            top: 5%; bottom: 5%;
+            left: 8%; right: 8%;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+        }
+        
+        .gate::after {
+            content: '';
+            position: absolute;
+            top: 8%; bottom: 8%;
+            left: 15%; right: 15%;
+            border: 1px dashed rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+        }
+
+        /* القفل الذهبي في المنتصف */
+        .gate-lock {
+            position: absolute;
+            z-index: 2010;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, #dfbd5a, #aa8529);
+            border: 3px solid #fff;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #3e2723;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            transition: transform 0.4s, opacity 0.5s;
+        }
+
+        .gate-lock:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 45px rgba(212, 175, 55, 0.6);
+        }
+
+        .gate-lock .initials {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .gate-lock .click-text {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.85rem;
+            font-weight: bold;
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* كلاسات الحركة (Animation) عند الفتح */
+        .gate-open-left {
+            transform: translateX(-100%);
+        }
+        
+        .gate-open-right {
+            transform: translateX(100%);
+        }
+        
+        .lock-hide {
+            opacity: 0;
+            transform: scale(0.5);
+            pointer-events: none;
+        }
+
+        /* ============ محتوى الدعوة ============ */
+        #main-content {
+            display: none; 
+            padding: 40px 15px; 
+        }
+
+        .container {
+            /* كارت أبيض شبه شفاف يبرز المحتوى ويُظهر الخلفية برقة */
+            background-color: rgba(255, 255, 255, 0.90);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1); 
+            border-radius: 25px; 
+            min-height: 100vh;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        /* الفواصل الزخرفية */
+        .divider {
+            font-size: 2rem;
+            color: #d4af37;
+            margin: 30px 0;
+            text-align: center;
+            letter-spacing: 10px;
+        }
+
+        /* صورة العرسان الرئيسية */
+        .couple-img {
+            width: 240px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid #fff;
+            padding: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            background: #d4af37;
+        }
+
+        /* الأسماء والنصوص */
+        .names {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #4a3b32;
+            margin: 10px 0;
+            direction: ltr;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .invitation-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #5d4a40;
+            margin: 20px;
+            font-style: italic;
+        }
+
+        /* ============ قصة حبنا ============ */
+        .story-box {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px 20px;
+            border-radius: 15px;
+            border-right: 4px solid #d4af37;
+            border-left: 4px solid #d4af37;
+            margin: 30px 0;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #5d4a40;
+        }
+
+        /* ============ معرض الصور ============ */
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .photo-gallery img {
+            width: 45%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 6px solid #fff;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: 0.3s;
+        }
+
+        .photo-gallery img:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 10;
+        }
+
+        /* ============ العد التنازلي ============ */
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+            direction: ltr;
+        }
+
+        .time-box {
+            background: linear-gradient(135deg, #f9ede7, #f4dcd6);
+            color: #4a3b32;
+            padding: 20px 15px;
+            border-radius: 15px;
+            min-width: 80px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 5px;
+        }
+        
+        .time-box small {
+            font-size: 1rem;
+            font-family: 'Tajawal', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ============ الأقسام (فيديو، GPS، سجل الزوار) ============ */
+        .section-title {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 2.2rem;
+            color: #4a3b32;
+            margin: 40px 0 20px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: #d4af37;
+            bottom: -10px;
+            left: 25%;
+            border-radius: 5px;
+        }
+
+        video, iframe {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 4px solid #fff;
+        }
+
+        /* ============ سجل الزوار ============ */
+        .guestbook-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.85);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .guestbook-form input, .guestbook-form textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            background: #fff;
+            transition: 0.3s;
+            color: #4a3b32;
+        }
+        
+        .guestbook-form input:focus, .guestbook-form textarea:focus {
+            border-color: #d4af37;
+            outline: none;
+        }
+
+        .guestbook-form button {
+            background-color: #4a3b32; /* متناسق مع النود والبني */
+            color: #d4af37;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .guestbook-form button:hover {
+            background-color: #d4af37;
+            color: #4a3b32;
+        }
+
+        #messages-container {
+            text-align: right;
+        }
+
+        .message-card {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-right: 5px solid #d4af37;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .message-card h4 { margin: 0 0 8px 0; color: #4a3b32; font-size: 1.2rem; }
+        .message-card p { margin: 0; color: #6e5c53; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+    <audio id="wedding-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="gate-screen">
+        <!-- ضلفة الباب اليسرى -->
+        <div class="gate gate-left" id="gate-left"></div>
+        
+        <!-- ضلفة الباب اليمنى -->
+        <div class="gate gate-right" id="gate-right"></div>
+        
+        <!-- القفل في المنتصف -->
+        <div class="gate-lock" id="gate-lock" onclick="openInvitation()">
+            <span class="initials">M&A</span>
+            <span class="click-text">افتح البوابة</span>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="container">
+            
+            <center>
+                <img src="couple.webp" alt="Mohamed and Amira" class="couple-img">
+            </center>
+
+            <center>
+                <div class="invitation-text">
+                    "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"<br><br>
+                    بكل الحب، نتشرف بدعوتكم لمشاركتنا فرحة عمرنا وتوثيق أجمل لحظات حياتنا بحضوركم الكريم.
+                </div>
+                <h1 class="names">Mohamed & Amira</h1>
+                <p style="font-size: 1.4rem; color: #4a3b32; font-weight: bold; margin-top: 5px;">الثلاثاء، 20 أكتوبر 2026</p>
+                <div class="divider">✧ ✧ ✧</div>
+            </center>
+
+            <center><h2 class="section-title">قصة حبنا</h2></center>
+            <div class="story-box">
+                نظرة، فابتسامة، فحديث.. هكذا بدأت حكايتنا. التقينا صدفة، ومنذ تلك اللحظة عرفنا أن قلبينا قد وجدا مسكنهما. مررنا بأيام جميلة، ضحكنا، وتشاركنا الأحلام والطموحات. واليوم، نكلل قصة حبنا بجمعنا تحت سقف واحد، لنبدأ فصلاً جديداً من حياتنا معاً يملأه الود والرحمة.
+            </div>
+
+            <center>
+                <h2 class="section-title">باقي على الفرح</h2>
+                <div class="countdown-wrapper" id="countdown">
+                    <div class="time-box"><span id="days">00</span><small>يوم</small></div>
+                    <div class="time-box"><span id="hours">00</span><small>ساعة</small></div>
+                    <div class="time-box"><span id="minutes">00</span><small>دقيقة</small></div>
+                    <div class="time-box"><span id="seconds">00</span><small>ثانية</small></div>
+                </div>
+                <div class="divider">✧ ✧ ✧</div>
+            </center>
+
+            <center><h2 class="section-title">أجمل لحظاتنا</h2></center>
+            <div class="photo-gallery">
+                <img src="photo1.jpg" alt="صورة 1" onerror="this.src='https://via.placeholder.com/300x400?text=Photo+1'">
+                <img src="photo2.jpg" alt="صورة 2" onerror="this.src='https://via.placeholder.com/300x400?text=Photo+2'">
+            </div>
+
+            <center><h2 class="section-title">فيديو العروسين</h2></center>
+            <video controls>
+                <source src="video.mp4" type="video/mp4">
+            </video>
+            <div class="divider">✧ ✧ ✧</div>
+
+            <center><h2 class="section-title">موقع الحفل</h2></center>
+            <p style="text-align: center; color: #6e5c53; margin-bottom: 15px;">قاعة ليلتي، فندق الماسة</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13812.592576394336!2d31.332306899999997!3d30.0612948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e5c3e660e51%3A0x6e9f16c1410f8231!2sCairo%20International%20Convention%20Centre!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg" height="300" allowfullscreen="" loading="lazy"></iframe>
+            <div class="divider">✧ ✧ ✧</div>
+
+            <center><h2 class="section-title">سجل التهاني</h2></center>
+            <p style="text-align: center; color: #6e5c53;">اتركوا لنا ذكرى جميلة من قلوبكم في يومنا المميز.</p>
+            <div class="guestbook-form">
+                <input type="text" id="guest-name" placeholder="الاسم الكريم" required>
+                <textarea id="guest-message" rows="4" placeholder="اكتب أمنياتك وتهنئتك للعروسين..." required></textarea>
+                <button onclick="addMessage()">إرسال التهنئة</button>
+            </div>
+            
+            <div id="messages-container"></div>
+
+        </div>
+    </div>
+
+    <script>
+        function openInvitation() {
+            const gateScreen = document.getElementById("gate-screen");
+            const leftGate = document.getElementById("gate-left");
+            const rightGate = document.getElementById("gate-right");
+            const lock = document.getElementById("gate-lock");
+            const music = document.getElementById("wedding-music");
+            
+            // تشغيل الموسيقى
+            music.play();
+            
+            // إخفاء القفل وتحريك الأبواب لليمين واليسار
+            lock.classList.add("lock-hide");
+            leftGate.classList.add("gate-open-left");
+            rightGate.classList.add("gate-open-right");
+            
+            // إظهار محتوى الدعوة في الخلفية
+            document.getElementById("main-content").style.display = "block";
+            
+            // الشاشة السوداء الخاصة بالبوابة تتلاشى
+            gateScreen.style.opacity = "0";
+            
+            // إزالة الشاشة بالكامل من الـ DOM بعد انتهاء الحركة
+            setTimeout(() => {
+                gateScreen.style.display = "none";
+            }, 2500); 
+        }
+
+        const weddingDate = new Date("Oct 20, 2026 20:00:00").getTime();
+        
+        const countdownTimer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("countdown").innerHTML = "<h3 style='color: #4a3b32; font-size: 2rem; font-family: Tajawal;'>اليوم هو أجمل أيام العمر! تم الزفاف بحمد الله 🤍</h3>";
+                return;
+            }
+
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+
+        function loadMessages() {
+            const container = document.getElementById("messages-container");
+            const messages = JSON.parse(localStorage.getItem("weddingMessages") || "[]");
+            container.innerHTML = "";
+            
+            messages.slice().reverse().forEach(msg => {
+                container.innerHTML += `
+                    <div class="message-card">
+                        <h4>${msg.name}</h4>
+                        <p>${msg.text}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function addMessage() {
+            const name = document.getElementById("guest-name").value;
+            const text = document.getElementById("guest-message").value;
+            
+            if(name.trim() === "" || text.trim() === "") {
+                alert("برجاء كتابة الاسم والرسالة عشان تفضل ذكرى حلوة!");
+                return;
+            }
+
+            const messages = JSON.parse(localStorage.getItem("weddingMessages") || "[]");
+            messages.push({ name: name, text: text });
+            localStorage.setItem("weddingMessages", JSON.stringify(messages));
+            
+            document.getElementById("guest-name").value = "";
+            document.getElementById("guest-message").value = "";
+            
+            loadMessages();
+        }
+
+        window.onload = loadMessages;
+    </script>
+
+</body>
+</html>

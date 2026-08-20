@@ -13,14 +13,24 @@
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif; 
-            /* خلفية الصفحة: ستظهر بكامل ألوانها */
-            background-image: url('bg.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             background-color: #fcf8f2;
             color: #4a3b32; /* بني داكن وأنيق للنصوص */
             overflow-x: hidden;
+            position: relative; /* مهم جداً لحل مشكلة الخلفية */
+        }
+
+        /* الطبقة السحرية لحل مشكلة بكسلة الخلفية في الآيفون والموبايلات */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* لإرسال الصورة خلف كل شيء */
         }
 
         /* ============ بوابة القصر (شاشة البداية) ============ */
@@ -31,9 +41,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1a110c; /* خلفية داكنة خلف البوابة */
+            background-color: #1a110c; 
             overflow: hidden;
-            transition: opacity 1s ease-in-out 1.2s; /* الشاشة تتلاشى بعد فتح الباب */
+            transition: opacity 1s ease-in-out 1.2s; 
         }
 
         /* تصميم البوابة (الضلف) */
@@ -42,7 +52,6 @@
             top: 0;
             width: 50%;
             height: 100%;
-            /* لون خشبي/معدني فخم */
             background: linear-gradient(135deg, #3e2723, #1f110c);
             box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
             transition: transform 1.5s cubic-bezier(0.64, 0.04, 0.35, 1);
@@ -54,15 +63,14 @@
 
         .gate-left {
             left: 0;
-            border-right: 4px solid #d4af37; /* حافة ذهبية */
+            border-right: 4px solid #d4af37; 
         }
 
         .gate-right {
             right: 0;
-            border-left: 4px solid #d4af37; /* حافة ذهبية */
+            border-left: 4px solid #d4af37; 
         }
 
-        /* نقوش وإطارات داخلية على البوابة */
         .gate::before {
             content: '';
             position: absolute;
@@ -125,7 +133,6 @@
             100% { opacity: 0.6; }
         }
 
-        /* كلاسات الحركة (Animation) عند الفتح */
         .gate-open-left {
             transform: translateX(-100%);
         }
@@ -147,7 +154,6 @@
         }
 
         .container {
-            /* كارت أبيض شبه شفاف يبرز المحتوى ويُظهر الخلفية برقة */
             background-color: rgba(255, 255, 255, 0.90);
             max-width: 700px;
             margin: 0 auto;
@@ -158,7 +164,6 @@
             border: 1px solid rgba(212, 175, 55, 0.4);
         }
 
-        /* الفواصل الزخرفية */
         .divider {
             font-size: 2rem;
             color: #d4af37;
@@ -167,7 +172,6 @@
             letter-spacing: 10px;
         }
 
-        /* صورة العرسان الرئيسية */
         .couple-img {
             width: 240px;
             height: 240px;
@@ -180,7 +184,6 @@
             background: #d4af37;
         }
 
-        /* الأسماء والنصوص */
         .names {
             font-family: 'Playfair Display', serif;
             font-size: 4rem;
@@ -199,7 +202,6 @@
             font-style: italic;
         }
 
-        /* ============ قصة حبنا ============ */
         .story-box {
             background: rgba(255, 255, 255, 0.7);
             padding: 30px 20px;
@@ -212,7 +214,6 @@
             color: #5d4a40;
         }
 
-        /* ============ معرض الصور ============ */
         .photo-gallery {
             display: flex;
             justify-content: center;
@@ -241,7 +242,6 @@
             z-index: 10;
         }
 
-        /* ============ العد التنازلي ============ */
         .countdown-wrapper {
             display: flex;
             justify-content: center;
@@ -259,6 +259,7 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border: 1px solid rgba(212, 175, 55, 0.5);
+            box-sizing: border-box;
         }
 
         .time-box span {
@@ -276,7 +277,6 @@
             letter-spacing: 1px;
         }
 
-        /* ============ الأقسام (فيديو، GPS، سجل الزوار) ============ */
         .section-title {
             font-family: 'Tajawal', sans-serif;
             font-size: 2.2rem;
@@ -304,7 +304,6 @@
             border: 4px solid #fff;
         }
 
-        /* ============ سجل الزوار ============ */
         .guestbook-form {
             display: flex;
             flex-direction: column;
@@ -333,7 +332,7 @@
         }
 
         .guestbook-form button {
-            background-color: #4a3b32; /* متناسق مع النود والبني */
+            background-color: #4a3b32; 
             color: #d4af37;
             border: none;
             padding: 15px;
@@ -364,24 +363,43 @@
         }
         .message-card h4 { margin: 0 0 8px 0; color: #4a3b32; font-size: 1.2rem; }
         .message-card p { margin: 0; color: #6e5c53; line-height: 1.5; }
-    /* ============ تعديلات توافق الهواتف (لحل مشكلة الخلفية) ============ */
+
+        /* ============ تعديلات توافق الهواتف (شاملة التايمر والخلفية) ============ */
         @media (max-width: 768px) {
-            body {
-                /* هذا السطر يمنع تمدد الصورة وبكسلتها على الموبايل */
-                background-attachment: scroll; 
-            }
-            
             .container {
-                /* تصغير عرض الكارت الأبيض قليلاً لتظهر النقوش الجانبية للخلفية */
-                width: 88%; 
-                margin: 20px auto;
-                padding: 30px 15px;
+                width: 90%; 
+                margin: 15px auto;
+                padding: 25px 12px;
                 box-sizing: border-box;
             }
-            
             .names {
-                /* تصغير حجم الأسماء قليلاً لتظل متناسقة على الشاشات الصغيرة */
-                font-size: 3rem; 
+                font-size: 2.5rem; 
+            }
+            
+            /* ضبط حاوية التايمر */
+            .countdown-wrapper {
+                gap: 6px;
+                margin: 25px 0;
+            }
+            
+            /* ضبط مربعات التايمر لتناسب عرض الشاشة */
+            .time-box {
+                min-width: auto;
+                width: 22%;
+                padding: 10px 4px;
+                border-radius: 10px;
+            }
+            
+            /* تصغير حجم الأرقام */
+            .time-box span {
+                font-size: 1.6rem;
+                margin-bottom: 2px;
+            }
+            
+            /* تصغير حجم النص */
+            .time-box small {
+                font-size: 0.75rem;
+                letter-spacing: 0;
             }
         }
     </style>
@@ -477,21 +495,16 @@
             const lock = document.getElementById("gate-lock");
             const music = document.getElementById("wedding-music");
             
-            // تشغيل الموسيقى
             music.play();
             
-            // إخفاء القفل وتحريك الأبواب لليمين واليسار
             lock.classList.add("lock-hide");
             leftGate.classList.add("gate-open-left");
             rightGate.classList.add("gate-open-right");
             
-            // إظهار محتوى الدعوة في الخلفية
             document.getElementById("main-content").style.display = "block";
             
-            // الشاشة السوداء الخاصة بالبوابة تتلاشى
             gateScreen.style.opacity = "0";
             
-            // إزالة الشاشة بالكامل من الـ DOM بعد انتهاء الحركة
             setTimeout(() => {
                 gateScreen.style.display = "none";
             }, 2500); 

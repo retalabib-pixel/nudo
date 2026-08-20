@@ -14,9 +14,9 @@
             padding: 0;
             font-family: 'Tajawal', sans-serif; 
             background-color: #fcf8f2;
-            color: #4a3b32; /* بني داكن وأنيق للنصوص */
+            color: #4a3b32; 
             overflow-x: hidden;
-            position: relative; /* مهم جداً لحل مشكلة الخلفية */
+            position: relative; 
         }
 
         /* الطبقة السحرية لحل مشكلة بكسلة الخلفية في الآيفون والموبايلات */
@@ -30,7 +30,7 @@
             background-image: url('bg.jpg'); 
             background-size: cover;
             background-position: center;
-            z-index: -1; /* لإرسال الصورة خلف كل شيء */
+            z-index: -1; 
         }
 
         /* ============ بوابة القصر (شاشة البداية) ============ */
@@ -376,13 +376,11 @@
                 font-size: 2.5rem; 
             }
             
-            /* ضبط حاوية التايمر */
             .countdown-wrapper {
                 gap: 6px;
                 margin: 25px 0;
             }
             
-            /* ضبط مربعات التايمر لتناسب عرض الشاشة */
             .time-box {
                 min-width: auto;
                 width: 22%;
@@ -390,13 +388,11 @@
                 border-radius: 10px;
             }
             
-            /* تصغير حجم الأرقام */
             .time-box span {
                 font-size: 1.6rem;
                 margin-bottom: 2px;
             }
             
-            /* تصغير حجم النص */
             .time-box small {
                 font-size: 0.75rem;
                 letter-spacing: 0;
@@ -464,8 +460,10 @@
             </div>
 
             <center><h2 class="section-title">فيديو العروسين</h2></center>
-            <video controls>
+            <!-- الكود الجديد المحدث لتشغيل الفيديو على الهواتف والآيفون -->
+            <video controls playsinline webkit-playsinline preload="metadata">
                 <source src="video.mp4" type="video/mp4">
+                <p style="text-align:center;">عذراً، متصفح هاتفك لا يدعم تشغيل هذا الفيديو.</p>
             </video>
             <div class="divider">✧ ✧ ✧</div>
 

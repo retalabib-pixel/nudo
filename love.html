@@ -364,6 +364,26 @@
         }
         .message-card h4 { margin: 0 0 8px 0; color: #4a3b32; font-size: 1.2rem; }
         .message-card p { margin: 0; color: #6e5c53; line-height: 1.5; }
+    /* ============ تعديلات توافق الهواتف (لحل مشكلة الخلفية) ============ */
+        @media (max-width: 768px) {
+            body {
+                /* هذا السطر يمنع تمدد الصورة وبكسلتها على الموبايل */
+                background-attachment: scroll; 
+            }
+            
+            .container {
+                /* تصغير عرض الكارت الأبيض قليلاً لتظهر النقوش الجانبية للخلفية */
+                width: 88%; 
+                margin: 20px auto;
+                padding: 30px 15px;
+                box-sizing: border-box;
+            }
+            
+            .names {
+                /* تصغير حجم الأسماء قليلاً لتظل متناسقة على الشاشات الصغيرة */
+                font-size: 3rem; 
+            }
+        }
     </style>
 </head>
 <body>

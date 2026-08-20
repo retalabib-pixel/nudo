@@ -4,21 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>البردية الملكية | Shady & Maryam</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{ box-sizing:border-box; margin:0; padding:0; }
 
 :root{
     --dark:#211308;
@@ -31,1408 +24,297 @@
 
 body{
     min-height:100vh;
-    background:
-        radial-gradient(circle at center,#604322 0%,#2b1a0d 55%,#100904 100%);
+    background: radial-gradient(circle at center,#604322 0%,#2b1a0d 55%,#100904 100%);
     font-family:"Amiri",serif;
     color:var(--dark);
     overflow-x:hidden;
 }
 
-/* =========================
-   PAGE
-========================= */
+/* ========================= PAGE & SCROLL ========================= */
+.page{ min-height:100vh; display:flex; justify-content:center; align-items:center; padding:30px 12px; }
+.scroll{ width:min(450px,96vw); min-height:720px; position:relative; }
 
-.page{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:30px 12px;
-}
-
-/* =========================
-   SCROLL
-========================= */
-
-.scroll{
-    width:min(450px,96vw);
-    min-height:720px;
-    position:relative;
-}
-
-/* =========================
-   RODS
-========================= */
-
+/* ========================= RODS ========================= */
 .rod{
-    position:absolute;
-    width:calc(100% + 34px);
-    height:38px;
-    left:-17px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #5d3715,
-            #e4b74f 25%,
-            #a16c27 50%,
-            #e5b84e 75%,
-            #4c2b10
-        );
-
-    border:2px solid #2b1707;
-    border-radius:22px;
-
-    box-shadow:
-        0 6px 14px rgba(0,0,0,.5),
-        inset 0 2px 4px rgba(255,255,255,.3);
-
+    position:absolute; width:calc(100% + 34px); height:38px; left:-17px;
+    background: linear-gradient(to bottom, #5d3715, #e4b74f 25%, #a16c27 50%, #e5b84e 75%, #4c2b10);
+    border:2px solid #2b1707; border-radius:22px;
+    box-shadow: 0 6px 14px rgba(0,0,0,.5), inset 0 2px 4px rgba(255,255,255,.3);
     z-index:30;
 }
+.rod.top{ top:0; }
+.rod.bottom{ bottom:0; }
 
-.rod.top{
-    top:0;
-}
-
-.rod.bottom{
-    bottom:0;
-}
-
-/* =========================
-   PAPER
-========================= */
-
+/* ========================= PAPER ========================= */
 .paper{
-
-    position:absolute;
-    top:18px;
-    bottom:18px;
-    left:0;
-    right:0;
-
-    background:
-
-        radial-gradient(
-            ellipse at center,
-            rgba(255,235,178,.8),
-            transparent 72%
-        ),
-
-        repeating-linear-gradient(
-            0deg,
-            rgba(90,50,10,.06) 0px,
-            rgba(90,50,10,.06) 2px,
-            transparent 2px,
-            transparent 7px
-        ),
-
-        linear-gradient(
-            90deg,
-            #a97431,
-            #efd79c 12%,
-            #e7ca8b 50%,
-            #efd79c 88%,
-            #a97431
-        );
-
-    border-left:5px solid #79501d;
-    border-right:5px solid #79501d;
-
-    box-shadow:
-        inset 15px 0 25px rgba(69,38,10,.3),
-        inset -15px 0 25px rgba(69,38,10,.3);
+    position:absolute; top:18px; bottom:18px; left:0; right:0;
+    background: radial-gradient(ellipse at center, rgba(255,235,178,.8), transparent 72%),
+                repeating-linear-gradient(0deg, rgba(90,50,10,.06) 0px, rgba(90,50,10,.06) 2px, transparent 2px, transparent 7px),
+                linear-gradient(90deg, #a97431, #efd79c 12%, #e7ca8b 50%, #efd79c 88%, #a97431);
+    border-left:5px solid #79501d; border-right:5px solid #79501d;
+    box-shadow: inset 15px 0 25px rgba(69,38,10,.3), inset -15px 0 25px rgba(69,38,10,.3);
 }
 
-/* =========================
-   COVER
-========================= */
-
+/* ========================= COVER ========================= */
 .cover{
-
-    position:absolute;
-    top:18px;
-    bottom:18px;
-    left:0;
-    right:0;
-
-    z-index:20;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #f0d99d,
-            #d1a957 75%
-        );
-
-    border-left:5px solid #714718;
-    border-right:5px solid #714718;
-
-    transition:
-        transform 1.7s cubic-bezier(.65,0,.25,1),
-        opacity 1s;
+    position:absolute; top:18px; bottom:18px; left:0; right:0; z-index:20;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    background: radial-gradient(circle at center, #f0d99d, #d1a957 75%);
+    border-left:5px solid #714718; border-right:5px solid #714718;
+    transition: transform 1.7s cubic-bezier(.65,0,.25,1), opacity 1s;
 }
+.scroll.open .cover{ transform:scaleX(0); transform-origin:center; opacity:0; pointer-events:none; }
 
-.scroll.open .cover{
-    transform:scaleX(0);
-    transform-origin:center;
-    opacity:0;
-    pointer-events:none;
-}
+/* ========================= HIEROGLYPHS ========================= */
+.hieroglyphs{ color:#704518; font-family:serif; font-size:27px; letter-spacing:6px; text-align:center; }
 
-/* =========================
-   HIEROGLYPHS
-========================= */
-
-.hieroglyphs{
-    color:#704518;
-    font-family:serif;
-    font-size:27px;
-    letter-spacing:6px;
-    text-align:center;
-}
-
-/* =========================
-   EYE
-========================= */
-
-.eye{
-    width:85px;
-    height:45px;
-    border:4px solid #633b15;
-    border-radius:50%;
-    margin:20px 0;
-    position:relative;
-}
-
+/* ========================= EYE (Updated 3D) ========================= */
+.eye{ width:100%; height:60px; display:flex; justify-content:center; align-items:center; margin:10px 0; }
 .eye::before{
-    content:"";
-    position:absolute;
-    width:22px;
-    height:22px;
-    background:#633b15;
-    border-radius:50%;
-    left:27px;
-    top:7px;
+    content:"𓂀"; font-size:65px; color:#5a3311;
+    text-shadow: 2px 3px 5px rgba(0,0,0,.4), -1px -1px 2px rgba(255,235,178,.8); position:relative;
 }
+.eye::after{ display:none; }
 
-.eye::after{
-    content:"";
-    position:absolute;
-    width:35px;
-    height:4px;
-    background:#633b15;
-    left:-25px;
-    top:18px;
-    transform:rotate(-10deg);
-}
-/* =========================
-   COVER TITLE
-========================= */
-
-.cover h1{
-    font-family:"Cormorant Garamond",serif;
-    font-size:42px;
-    color:#3d220d;
-    margin-bottom:5px;
-}
-
-.cover p{
-    font-size:18px;
-}
-
+/* ========================= COVER TITLE & BUTTON ========================= */
+.cover h1{ font-family:"Cormorant Garamond",serif; font-size:42px; color:#3d220d; margin-bottom:5px; }
+.cover p{ font-size:18px; }
 .open-btn{
-
-    margin-top:30px;
-
-    border:2px solid #8b5c1f;
-
-    background:#573014;
-    color:#f3d88d;
-
-    padding:12px 35px;
-
-    font-family:"Amiri",serif;
-    font-size:18px;
-
-    cursor:pointer;
-
-    border-radius:3px;
-
-    box-shadow:0 7px 15px rgba(0,0,0,.35);
-
-    transition:.3s;
+    margin-top:30px; border:2px solid #8b5c1f; background:#573014; color:#f3d88d;
+    padding:12px 35px; font-family:"Amiri",serif; font-size:18px; cursor:pointer;
+    border-radius:3px; box-shadow:0 7px 15px rgba(0,0,0,.35); transition:.3s;
 }
+.open-btn:hover{ transform:translateY(-3px); background:#743d16; }
 
-.open-btn:hover{
-    transform:translateY(-3px);
-    background:#743d16;
-}
-
-/* =========================
-   INVITATION
-========================= */
-
+/* ========================= INVITATION BODY ========================= */
 .invitation{
-
-    position:absolute;
-
-    top:18px;
-    bottom:18px;
-    left:0;
-    right:0;
-
-    z-index:10;
-
-    padding:48px 25px 60px;
-
-    overflow-y:auto;
-
-    opacity:0;
-    transform:translateY(25px);
-
-    transition:
-        opacity 1.3s ease 1s,
-        transform 1.3s ease 1s;
-
-    scrollbar-width:none;
+    position:absolute; top:18px; bottom:18px; left:0; right:0; z-index:10;
+    padding:48px 25px 60px; overflow-y:auto; opacity:0; transform:translateY(25px);
+    transition: opacity 1.3s ease 1s, transform 1.3s ease 1s; scrollbar-width:none;
 }
+.invitation::-webkit-scrollbar{ display:none; }
+.scroll.open .invitation{ opacity:1; transform:translateY(0); }
 
-.invitation::-webkit-scrollbar{
-    display:none;
-}
-
-.scroll.open .invitation{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* =========================
-   PHOTO
-========================= */
-
+/* ========================= PHOTO ========================= */
 .photo-frame{
-
-    width:190px;
-    height:190px;
-
-    margin:auto;
-
-    padding:8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #805116,
-            #e5bd5b,
-            #835316
-        );
-
-    border:4px solid #714518;
-
-    box-shadow:
-        0 10px 25px rgba(50,25,5,.4);
-
-    position:relative;
+    width:190px; height:190px; margin:auto; padding:8px; position:relative;
+    background: linear-gradient(135deg, #805116, #e5bd5b, #835316);
+    border:4px solid #714518; box-shadow: 0 10px 25px rgba(50,25,5,.4);
 }
+.photo-frame::before, .photo-frame::after{ content:"𓆣"; position:absolute; color:#704416; font-size:27px; }
+.photo-frame::before{ top:-38px; left:-12px; }
+.photo-frame::after{ bottom:-38px; right:-12px; }
+.photo-frame img{ width:100%; height:100%; object-fit:cover; display:block; border:3px solid #f0d493; }
 
-.photo-frame::before,
-.photo-frame::after{
-    content:"𓆣";
-    position:absolute;
-    color:#704416;
-    font-size:27px;
-}
+/* ========================= NAMES & LETTER ========================= */
+.names{ text-align:center; margin-top:20px; }
+.names .intro{ font-size:17px; }
+.names h2{ font-family:"Cormorant Garamond",serif; font-size:42px; color:#4a280f; line-height:1.1; margin:5px 0; }
+.ornament{ color:#704316; font-size:25px; margin:10px 0; }
+.letter{ text-align:center; font-size:17px; line-height:2; color:#3e2410; margin-top:5px; }
+.letter strong{ color:#6d3713; font-size:20px; }
 
-.photo-frame::before{
-    top:-38px;
-    left:-12px;
-}
-
-.photo-frame::after{
-    bottom:-38px;
-    right:-12px;
-}
-
-.photo-frame img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    display:block;
-
-    border:3px solid #f0d493;
-}
-
-/* =========================
-   NAMES
-========================= */
-
-.names{
-    text-align:center;
-    margin-top:20px;
-}
-
-.names .intro{
-    font-size:17px;
-}
-
-.names h2{
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:42px;
-
-    color:#4a280f;
-
-    line-height:1.1;
-
-    margin:5px 0;
-}
-
-.ornament{
-    color:#704316;
-    font-size:25px;
-    margin:10px 0;
-}
-
-/* =========================
-   LETTER
-========================= */
-
-.letter{
-
-    text-align:center;
-
-    font-size:17px;
-
-    line-height:2;
-
-    color:#3e2410;
-
-    margin-top:5px;
-}
-
-.letter strong{
-    color:#6d3713;
-    font-size:20px;
-}
-
-/* =========================
-   LOCATION
-========================= */
-
+/* ========================= LOCATION ========================= */
 .location{
-
-    margin-top:20px;
-
-    padding:14px 5px;
-
-    text-align:center;
-
-    border-top:1px solid rgba(89,49,12,.45);
-    border-bottom:1px solid rgba(89,49,12,.45);
+    margin-top:20px; padding:14px 5px; text-align:center;
+    border-top:1px solid rgba(89,49,12,.45); border-bottom:1px solid rgba(89,49,12,.45);
 }
+.location .main{ font-family:"Cormorant Garamond",serif; font-size:31px; font-weight:bold; }
+.location p{ font-size:16px; }
 
-.location .main{
-    font-family:"Cormorant Garamond",serif;
-    font-size:31px;
-    font-weight:bold;
-}
-
-.location p{
-    font-size:16px;
-}
-
-/* =========================
-   COUNTDOWN TITLE
-========================= */
-
-.count-title{
-
-    text-align:center;
-
-    margin-top:23px;
-
-    color:#603712;
-
-    font-size:19px;
-}
-
-/* =========================
-   HOURGLASS
-========================= */
+/* ========================= HOURGLASS (MP4 Video) & COUNTDOWN ========================= */
+.count-title{ text-align:center; margin-top:23px; color:#603712; font-size:19px; }
 
 .hourglass{
-
-    width:150px;
-    height:200px;
-
-    margin:10px auto 0;
-
-    position:relative;
+    width: 130px;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* wooden/gold frame */
-
-.hourglass::before,
-.hourglass::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:20px;
-
-    width:110px;
-
-    height:12px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #57320f,
-            #e0b54d,
-            #6b4117
-        );
-
-    border-radius:10px;
-
-    z-index:5;
-}
-
-.hourglass::before{
-    top:5px;
-}
-
-.hourglass::after{
-    bottom:5px;
-}
-
-/* glass shape */
-
-.glass{
-
-    position:absolute;
-
-    top:15px;
-    bottom:15px;
-
-    left:37px;
-
-    width:76px;
-
-    border-left:3px solid rgba(91,59,27,.7);
-    border-right:3px solid rgba(91,59,27,.7);
-
-    overflow:hidden;
-}
-
-/* top chamber */
-
-.top-glass{
-
-    position:absolute;
-
-    width:70px;
-    height:77px;
-
-    top:0;
-    left:0;
-
-    border:3px solid #704519;
-
-    border-top:0;
-
-    border-radius:
-0 0 45px 45px;
-
-    clip-path:polygon(
-        0 0,
-        100% 0,
-        65% 100%,
-        35% 100%
-    );
-
-    background:
-        rgba(255,239,191,.2);
-}
-
-/* bottom chamber */
-
-.bottom-glass{
-
-    position:absolute;
-
-    width:70px;
-    height:77px;
-
-    bottom:0;
-    left:0;
-
-    border:3px solid #704519;
-
-    border-bottom:0;
-
-    border-radius:
-        45px 45px 0 0;
-
-    clip-path:polygon(
-        35% 0,
-        65% 0,
-        100% 100%,
-        0 100%
-    );
-
-    background:
-        rgba(255,239,191,.2);
-}
-
-/* sand */
-
-.sand-top{
-
-    position:absolute;
-
-    top:8px;
-    left:16px;
-
-    width:38px;
-    height:63px;
-
-    background:#a86e20;
-
-    clip-path:polygon(
-        0 0,
-        100% 0,
-        62% 100%,
-        38% 100%
-    );
-
-    animation:sandFalling 60s linear infinite;
-    transform-origin:bottom;
-}
-
-.sand-bottom{
-
-    position:absolute;
-
-    bottom:7px;
-    left:13px;
-
-    width:44px;
-    height:50px;
-
-    background:#b77d27;
-
-    clip-path:polygon(
-        38% 0,
-        62% 0,
-        100% 100%,
-        0 100%
-    );
-
-    animation:sandGrowing 60s linear infinite;
-    transform-origin:bottom;
-}
-
-.sand-stream{
-
-    position:absolute;
-
-    width:4px;
-    height:65px;
-
-    background:#b77d27;
-
-    top:65px;
-    left:34px;
-
-    animation:stream 1s linear infinite;
-}
-
-@keyframes sandFalling{
-
-    0%{
-        transform:scaleY(1);
-    }
-
-    100%{
-        transform:scaleY(.08);
-    }
-}
-
-@keyframes sandGrowing{
-
-    0%{
-        transform:scaleY(.2);
-    }
-
-    100%{
-        transform:scaleY(1);
-    }
-}
-
-@keyframes stream{
-
-    0%,100%{
-        opacity:.8;
-    }
-
-    50%{
-        opacity:.3;
-    }
-}
-
-/* =========================
-   COUNTDOWN NUMBERS
-========================= */
-
-.countdown{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:6px;
-
-    margin-top:5px;
-}
-
-.time-box{
-
-    text-align:center;
-
-    border:1px solid rgba(99,56,15,.4);
-
-    background:rgba(255,236,181,.25);
-
-    padding:7px 3px;
-}
-
-.time-box strong{
-
-    display:block;
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:25px;
-
-    color:#5a3211;
-}
-
-.time-box span{
-    font-size:12px;
-}
-
-/* =========================
-   GUESTBOOK
-========================= */
-
+.countdown{ display:grid; grid-template-columns: repeat(3,1fr); gap:6px; margin-top:5px; }
+.time-box{ text-align:center; border:1px solid rgba(99,56,15,.4); background:rgba(255,236,181,.25); padding:7px 3px; }
+.time-box strong{ display:block; font-family:"Cormorant Garamond",serif; font-size:25px; color:#5a3211; }
+.time-box span{ font-size:12px; }
+
+/* ========================= GUESTBOOK ========================= */
 .guestbook{
-
-    margin-top:25px;
-
-    padding:18px 14px;
-
-    border:1px solid rgba(94,53,13,.5);
-
-    background:
-        rgba(255,231,169,.22);
-
-    position:relative;
+    margin-top:25px; padding:18px 14px; border:1px solid rgba(94,53,13,.5);
+    background: rgba(255,231,169,.22); position:relative;
 }
-
 .guestbook::before{
-    content:"𓂀";
-    position:absolute;
-    top:-18px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#e7cb8b;
-    padding:0 10px;
-    color:#704316;
-    font-size:22px;
+    content:"𓂀"; position:absolute; top:-18px; left:50%; transform:translateX(-50%);
+    background:#e7cb8b; padding:0 10px; color:#704316; font-size:22px;
 }
-
-.guestbook h3{
-
-    text-align:center;
-
-    font-family:"Cormorant Garamond",serif;
-
-    font-size:28px;
-
-    color:#542d10;
-
-    margin-bottom:5px;
+.guestbook h3{ text-align:center; font-family:"Cormorant Garamond",serif; font-size:28px; color:#542d10; margin-bottom:5px; }
+.guestbook .sub{ text-align:center; font-size:14px; margin-bottom:12px; }
+.guestbook input, .guestbook textarea{
+    width:100%; border:1px solid #9b6b2a; background:rgba(255,244,204,.65);
+    padding:10px; margin-bottom:9px; font-family:"Amiri",serif; color:#3b220e; outline:none;
 }
-
-.guestbook .sub{
-    text-align:center;
-    font-size:14px;
-    margin-bottom:12px;
-}
-
-.guestbook input,
-.guestbook textarea{
-
-    width:100%;
-
-    border:1px solid #9b6b2a;
-
-    background:rgba(255,244,204,.65);
-
-    padding:10px;
-
-    margin-bottom:9px;
-
-    font-family:"Amiri",serif;
-
-    color:#3b220e;
-
-    outline:none;
-}
-
-.guestbook textarea{
-
-    min-height:90px;
-
-    resize:none;
-}
-
-.guestbook input:focus,
-.guestbook textarea:focus{
-    border-color:#694015;
-}
-
+.guestbook textarea{ min-height:90px; resize:none; }
+.guestbook input:focus, .guestbook textarea:focus{ border-color:#694015; }
 .send-wish{
-
-    width:100%;
-
-    border:0;
-
-    padding:11px;
-
-    background:#603513;
-
-    color:#f4d990;
-
-    font-family:"Amiri",serif;
-
-    font-size:16px;
-
-    cursor:pointer;
-
-    transition:.3s;
+    width:100%; border:0; padding:11px; background:#603513; color:#f4d990;
+    font-family:"Amiri",serif; font-size:16px; cursor:pointer; transition:.3s;
 }
+.send-wish:hover{ background:#7a4217; }
+.success{ display:none; text-align:center; margin-top:12px; color:#633511; font-size:16px; }
 
-.send-wish:hover{
-    background:#7a4217;
-}
-
-.success{
-
-    display:none;
-
-    text-align:center;
-
-    margin-top:12px;
-
-    color:#633511;
-
-    font-size:16px;
-}
-
-/* =========================
-   MUSIC
-========================= */
-
+/* ========================= MUSIC ========================= */
 .music-button{
-
-    position:fixed;
-
-    bottom:20px;
-    left:20px;
-
-    width:55px;
-    height:55px;
-
-    border-radius:50%;
-
-    border:2px solid #e1b952;
-
-    background:#4b2910;
-
-    color:#f3d58b;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    z-index:100;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.5);
-
-    animation:pulse 2s infinite;
+    position:fixed; bottom:20px; left:20px; width:55px; height:55px;
+    border-radius:50%; border:2px solid #e1b952; background:#4b2910;
+    color:#f3d58b; font-size:22px; cursor:pointer; z-index:100;
+    box-shadow:0 5px 15px rgba(0,0,0,.5); animation:pulse 2s infinite;
 }
-
 @keyframes pulse{
-
-    0%,100%{
-        box-shadow:
-0 5px 15px rgba(0,0,0,.5);
-    }
-
-    50%{
-        box-shadow:
-            0 5px 25px rgba(224,182,77,.55);
-    }
+    0%,100%{ box-shadow:0 5px 15px rgba(0,0,0,.5); }
+    50%{ box-shadow:0 5px 25px rgba(224,182,77,.55); }
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* ========================= FOOTER ========================= */
+.footer{ text-align:center; margin-top:22px; font-size:14px; color:#5b3618; }
+.footer .symbols{ font-size:22px; margin-bottom:4px; }
 
-.footer{
-
-    text-align:center;
-
-    margin-top:22px;
-
-    font-size:14px;
-
-    color:#5b3618;
-}
-
-.footer .symbols{
-    font-size:22px;
-    margin-bottom:4px;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
+/* ========================= MOBILE ========================= */
 @media(max-width:380px){
-
-    .scroll{
-        min-height:680px;
-    }
-
-    .invitation{
-        padding-left:18px;
-        padding-right:18px;
-    }
-
-    .photo-frame{
-        width:160px;
-        height:160px;
-    }
-
-    .names h2{
-        font-size:34px;
-    }
-
-    .letter{
-        font-size:15px;
-    }
-
+    .scroll{ min-height:680px; }
+    .invitation{ padding-left:18px; padding-right:18px; }
+    .photo-frame{ width:160px; height:160px; }
+    .names h2{ font-size:34px; }
+    .letter{ font-size:15px; }
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- ==================================
-     MUSIC
-================================== -->
-
+<!-- MUSIC -->
 <audio id="music" loop>
     <source src="pharahosmusic.mp3" type="audio/mpeg">
 </audio>
-
-<button
-    class="music-button"
-    onclick="toggleMusic()"
-    id="musicBtn"
-    title="تشغيل الموسيقى">
-    ♫
-</button>
-
+<button class="music-button" onclick="toggleMusic()" id="musicBtn" title="تشغيل الموسيقى">♫</button>
 
 <div class="page">
-
 <div class="scroll" id="scroll">
-
     <div class="rod top"></div>
-
     <div class="paper"></div>
 
-
-    <!-- ==================================
-         CLOSED COVER
-    ================================== -->
-
+    <!-- COVER -->
     <div class="cover">
-
-        <div class="hieroglyphs">
-            𓂀 𓆣 𓂀
-        </div>
-
+        <div class="hieroglyphs">𓂀 𓆣 𓂀</div>
         <div class="eye"></div>
-
-        <div class="hieroglyphs">
-            𓇯 𓂀 𓆣 𓇯
-        </div>
-
-        <h1>
-            مرسوم ملكي
-        </h1>
-
-        <p>
-            دعوة من طيبة
-        </p>
-
-        <button
-            class="open-btn"
-            onclick="openScroll()">
-
-            افتح البردية
-
-        </button>
-
+        <div class="hieroglyphs">𓇯 𓂀 𓆣 𓇯</div>
+        <h1>مرسوم ملكي</h1>
+        <p>دعوة من طيبة</p>
+        <button class="open-btn" onclick="openScroll()">افتح البردية</button>
     </div>
 
-
-    <!-- ==================================
-         INVITATION
-    ================================== -->
-
+    <!-- INVITATION -->
     <div class="invitation">
-
-
-        <!-- PHOTO -->
-
         <div class="photo-frame">
-
-            <!--
-            مهم:
-            ضعي الصورة في نفس فولدر ملف HTML
-            باسم:
-            photo5.jpg
-
-            لو امتدادها PNG اكتبي photo5.png
-            -->
-
-            <img
-                src="photo5.jpg"
-                alt="Shady & Maryam">
-
+            <img src="./photo5.jpg" alt="Shady & Maryam">
         </div>
-
-
-        <!-- NAMES -->
 
         <div class="names">
-
-            <div class="intro">
-                من أرض النيل
-            </div>
-
-            <h2>
-                Shady & Maryam
-            </h2>
-
-            <div class="ornament">
-                𓇯 𓂀 𓆣 𓂀 𓇯
-            </div>
-
+            <div class="intro">من أرض النيل</div>
+            <h2>Shady & Maryam</h2>
+            <div class="ornament">𓇯 𓂀 𓆣 𓂀 𓇯</div>
         </div>
-
-
-        <!-- LETTER -->
 
         <div class="letter">
-
-            <p>
-                إلى كل من له مكانة في قلوبنا،
-            </p>
-
-            <p>
-                من أرض طيبة، حيث يروي النيل حكايات
-                السنين، نرسل إليكم هذه الدعوة
-                لنشارككم يومًا من أجمل أيام حياتنا.
-            </p>
-
-            <p>
-                <strong>
-                    يشرفنا حضوركم ليلة زفافنا
-                </strong>
-            </p>
-
-            <p>
-                فكونوا معنا في هذه الليلة،
-                وشاركونا فرحتنا،
-                واجعلوا حضوركم شاهدًا على بداية
-                فصل جديد من حكايتنا.
-            </p>
-
-            <p>
-                نسأل الله أن يجعلها ليلة مباركة
-                تملؤها المحبة والفرح.
-            </p>
-
+            <p>إلى كل من له مكانة في قلوبنا،</p>
+            <p>من أرض طيبة، حيث يروي النيل حكايات السنين، نرسل إليكم هذه الدعوة لنشارككم يومًا من أجمل أيام حياتنا.</p>
+            <p><strong>يشرفنا حضوركم ليلة زفافنا</strong></p>
+            <p>فكونوا معنا في هذه الليلة، وشاركونا فرحتنا، واجعلوا حضوركم شاهدًا على بداية فصل جديد من حكايتنا.</p>
+            <p>نسأل الله أن يجعلها ليلة مباركة تملؤها المحبة والفرح.</p>
         </div>
-
-
-        <!-- LOCATION -->
 
         <div class="location">
-
-            <div class="main">
-                طيبة القديمة
-            </div>
-
-            <p>
-                الأقصر — أرض النيل والحضارة
-            </p>
-
-            <p>
-                𓂀  ليلة الزفاف  𓂀
-            </p>
-
-            <p>
-                8 أغسطس 2026
-            </p>
-
+            <div class="main">طيبة القديمة</div>
+            <p>الأقصر — أرض النيل والحضارة</p>
+            <p>𓂀  ليلة الزفاف  𓂀</p>
+            <p>8 أغسطس 2026</p>
         </div>
 
+        <div class="count-title">⏳ ما تبقى حتى ليلة الزفاف</div>
 
-        <!-- ==================================
-             HOURGLASS COUNTDOWN
-        ================================== -->
-
-        <div class="count-title">
-
-            ⏳ ما تبقى حتى ليلة الزفاف
-
-        </div>
-
-
+        <!-- ========================= HOURGLASS MP4 ========================= -->
         <div class="hourglass">
-
-            <div class="glass">
-
-                <div class="top-glass"></div>
-
-                <div class="bottom-glass"></div>
-<div class="sand-top"></div>
-
-                <div class="sand-stream"></div>
-
-                <div class="sand-bottom"></div>
-
-            </div>
-
+            <video autoplay loop muted playsinline style="width: 100%; border-radius: 15px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));">
+                <source src="hourglass-anim.mp4" type="video/mp4">
+            </video>
         </div>
-
 
         <div class="countdown">
-
-            <div class="time-box">
-
-                <strong id="days">
-                    00
-                </strong>
-
-                <span>
-                    يوم
-                </span>
-
-            </div>
-
-
-            <div class="time-box">
-
-                <strong id="hours">
-                    00
-                </strong>
-
-                <span>
-                    ساعة
-                </span>
-
-            </div>
-
-
-            <div class="time-box">
-
-                <strong id="minutes">
-                    00
-                </strong>
-
-                <span>
-                    دقيقة
-                </span>
-
-            </div>
-
+            <div class="time-box"><strong id="days">00</strong><span>يوم</span></div>
+            <div class="time-box"><strong id="hours">00</strong><span>ساعة</span></div>
+            <div class="time-box"><strong id="minutes">00</strong><span>دقيقة</span></div>
         </div>
-
-
-        <!-- ==================================
-             GUEST BOOK
-        ================================== -->
 
         <div class="guestbook">
-
-            <h3>
-                اترك تهنئتك
-            </h3>
-
-            <div class="sub">
-                اكتب كلمة للعروسين تبقى ذكرى جميلة
-            </div>
-
-
-            <input
-                type="text"
-                id="guestName"
-                placeholder="اسمك">
-
-
-            <textarea
-                id="guestMessage"
-                placeholder="اكتب تهنئتك للعروسين هنا...">
-            </textarea>
-
-
-            <button
-                class="send-wish"
-                onclick="sendWish()">
-
-                𓂀 أرسل التهنئة 𓂀
-
-            </button>
-
-
-            <div
-                class="success"
-                id="success">
-
-                ✨ وصلت تهنئتك للعروسين 🤎
-
-            </div>
-
+            <h3>اترك تهنئتك</h3>
+            <div class="sub">اكتب كلمة للعروسين تبقى ذكرى جميلة</div>
+            <input type="text" id="guestName" placeholder="اسمك">
+            <textarea id="guestMessage" placeholder="اكتب تهنئتك للعروسين هنا..."></textarea>
+            <button class="send-wish" onclick="sendWish()">𓂀 أرسل التهنئة 𓂀</button>
+            <div class="success" id="success">✨ وصلت تهنئتك للعروسين 🤎</div>
         </div>
-
-
-        <!-- FOOTER -->
 
         <div class="footer">
-
-            <div class="symbols">
-                𓇯 𓂀 𓆣 𓇯
-            </div>
-
-            <p>
-                حضوركم يزيد فرحتنا اكتمالًا
-            </p>
-
+            <div class="symbols">𓇯 𓂀 𓆣 𓇯</div>
+            <p>حضوركم يزيد فرحتنا اكتمالًا</p>
         </div>
-
-
     </div>
-
-
     <div class="rod bottom"></div>
-
 </div>
-
 </div>
-
 
 <script>
+function openScroll(){ document.getElementById("scroll").classList.add("open"); }
 
-/* ==================================
-   OPEN SCROLL
-================================== */
-
-function openScroll(){
-
-    document
-        .getElementById("scroll")
-        .classList.add("open");
-
-}
-
-
-/* ==================================
-   MUSIC
-================================== */
-
-const music =
-    document.getElementById("music");
-
-const musicBtn =
-    document.getElementById("musicBtn");
-
-
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
 function toggleMusic(){
-
-    if(music.paused){
-
-        music.play();
-
-        musicBtn.innerHTML = "❚❚";
-
-    }else{
-
-        music.pause();
-
-        musicBtn.innerHTML = "♫";
-
-    }
-
+    if(music.paused){ music.play(); musicBtn.innerHTML = "❚❚"; }
+    else{ music.pause(); musicBtn.innerHTML = "♫"; }
 }
 
-
-/* ==================================
-   COUNTDOWN
-
-   غيري التاريخ هنا فقط
-================================== */
-
-const weddingDate =
-    new Date("August 8, 2026 19:00:00").getTime();
-
-
+const weddingDate = new Date("August 8, 2027 19:00:00").getTime();
 function updateCountdown(){
-
-    const now =
-        new Date().getTime();
-
-    const distance =
-        weddingDate - now;
-
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
 
     if(distance <= 0){
-
-        document.getElementById("days")
-            .innerText = "00";
-
-        document.getElementById("hours")
-            .innerText = "00";
-
-        document.getElementById("minutes")
-            .innerText = "00";
-
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
         return;
-
     }
 
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
 
-    const days =
-        Math.floor(
-            distance /
-            (1000 * 60 * 60 * 24)
-        );
-
-
-    const hours =
-        Math.floor(
-            (distance /
-            (1000 * 60 * 60)) % 24
-        );
-
-
-    const minutes =
-        Math.floor(
-            (distance /
-            (1000 * 60)) % 60
-        );
-
-
-    document.getElementById("days")
-        .innerText =
-        String(days).padStart(2,"0");
-
-
-    document.getElementById("hours")
-        .innerText =
-        String(hours).padStart(2,"0");
-
-
-    document.getElementById("minutes")
-        .innerText =
-        String(minutes).padStart(2,"0");
-
+    document.getElementById("days").innerText = String(days).padStart(2,"0");
+    document.getElementById("hours").innerText = String(hours).padStart(2,"0");
+    document.getElementById("minutes").innerText = String(minutes).padStart(2,"0");
 }
-
-
 updateCountdown();
-
-setInterval(
-    updateCountdown,
-    1000
-);
-
-
-/* ==================================
-   GUEST WISH
-================================== */
+setInterval(updateCountdown, 1000);
 
 function sendWish(){
+    const name = document.getElementById("guestName").value.trim();
+    const message = document.getElementById("guestMessage").value.trim();
+    const success = document.getElementById("success");
 
-    const name =
-        document.
-getElementById("guestName").value.trim();
-
-    const message =
-        document.getElementById("guestMessage").value.trim();
-
-    const success =
-        document.getElementById("success");
-
-
-    if(!name || !message){
-
-        alert("من فضلك اكتب اسمك وتهنئتك 🤎");
-
-        return;
-
-    }
-
-
-    /*
-       هنا حاليًا تظهر رسالة نجاح فقط.
-
-       لو عايزة بعد كده نخلي التهنئة
-       توصل فعلًا للعروسين على WhatsApp
-       أو Google Sheets / Firebase
-       نربطها هنا.
-    */
-
+    if(!name || !message){ alert("من فضلك اكتب اسمك وتهنئتك 🤎"); return; }
     success.style.display = "block";
-
     document.getElementById("guestName").value = "";
-
     document.getElementById("guestMessage").value = "";
-
 }
-
 </script>
-
 </body>
 </html>

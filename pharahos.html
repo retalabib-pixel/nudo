@@ -68,13 +68,12 @@ body{
 /* ========================= HIEROGLYPHS ========================= */
 .hieroglyphs{ color:#704518; font-family:serif; font-size:27px; letter-spacing:6px; text-align:center; }
 
-/* ========================= EYE (Updated 3D) ========================= */
+/* ========================= EYE ========================= */
 .eye{ width:100%; height:60px; display:flex; justify-content:center; align-items:center; margin:10px 0; }
 .eye::before{
     content:"𓂀"; font-size:65px; color:#5a3311;
     text-shadow: 2px 3px 5px rgba(0,0,0,.4), -1px -1px 2px rgba(255,235,178,.8); position:relative;
 }
-.eye::after{ display:none; }
 
 /* ========================= COVER TITLE & BUTTON ========================= */
 .cover h1{ font-family:"Cormorant Garamond",serif; font-size:42px; color:#3d220d; margin-bottom:5px; }
@@ -122,7 +121,7 @@ body{
 .location .main{ font-family:"Cormorant Garamond",serif; font-size:31px; font-weight:bold; }
 .location p{ font-size:16px; }
 
-/* ========================= HOURGLASS (MP4 Video) & COUNTDOWN ========================= */
+/* ========================= HOURGLASS & COUNTDOWN ========================= */
 .count-title{ text-align:center; margin-top:23px; color:#603712; font-size:19px; }
 
 .hourglass{
@@ -236,7 +235,7 @@ body{
             <div class="main">طيبة القديمة</div>
             <p>الأقصر — أرض النيل والحضارة</p>
             <p>𓂀  ليلة الزفاف  𓂀</p>
-            <p>8 أغسطس 2026</p>
+            <p>31 أغسطس 2026</p>
         </div>
 
         <div class="count-title">⏳ ما تبقى حتى ليلة الزفاف</div>
@@ -282,7 +281,9 @@ function toggleMusic(){
     else{ music.pause(); musicBtn.innerHTML = "♫"; }
 }
 
-const weddingDate = new Date("August 8, 2027 19:00:00").getTime();
+// ضبط العد التنازلي ليكون بعد 10 أيام بالضبط من تاريخ اليوم (تلقائياً)
+const weddingDate = new Date().getTime() + (10 * 24 * 60 * 60 * 1000);
+
 function updateCountdown(){
     const now = new Date().getTime();
     const distance = weddingDate - now;

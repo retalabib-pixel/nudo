@@ -45,7 +45,7 @@ body.opened {
 }
 
 /* =====================================================
-   COVER
+   COVER (الغلاف بعد حل مشكلة الأبعاد)
 ===================================================== */
 .cover {
     position: fixed;
@@ -54,7 +54,8 @@ body.opened {
     height: 100vh;
     height: 100dvh;
     z-index: 9999;
-    background-color: #252525;
+    /* لون يتناسب مع أطراف الصورة في الشاشات الطويلة */
+    background-color: #eedecc; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,13 +68,15 @@ body.opened {
     height: 100%;
     position: relative;
     background-image: url("hesham_salma_1.png");
-    background-size: cover;
+    /* منع القص وعرض الصورة بكامل عرض الشاشة */
+    background-size: 100% auto; 
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-bottom: 30px;
+    /* مسافة أمان للزرار عشان مايغطيش على الكلام المطبوع في الصورة */
+    padding-bottom: 50px; 
 }
 
 .cover.closed {
@@ -491,7 +494,6 @@ body.opened {
                 <h2 class="section-title">من أرشيف المتزوجون 🎬</h2>
                 <p class="section-intro">لأن القضية دي حصل فيها شبهات تخلينا نرجع لأهل الخبرة...</p>
                 <div class="video">
-                    <!-- تم ضبط رابط التضمين المتوافق والمستقر -->
                     <iframe 
                         src="https://www.youtube-nocookie.com/embed/Rg1cILVVT3Q?rel=0" 
                         title="مشهد من مسرحية المتزوجون" 

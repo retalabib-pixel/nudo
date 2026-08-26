@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة زفاف | أحمد & سارة</title>
+
+  <!-- استدعاء الخطوط العربية الفخمة -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #020a13; /* لون غامق حول الهاتف في الشاشات الكبيرة */
+      color: #d8c18a;
+      font-family: 'Amiri', serif;
+    }
+
+    /* =========================
+       شكل الهاتف (الموبايل فريم)
+    ========================= */
+    .mobile-frame {
+      width: 100%;
+      max-width: 450px; /* يمنع الدعوة من أن تصبح عريضة جداً */
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+      background: #06182d;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       COVER (الغلاف)
+    ========================= */
+    .cover {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%); /* لضبط المنتصف في الشاشات الكبيرة */
+      z-index: 1000;
+      width: 100%;
+      max-width: 450px;
+      height: 100dvh;
+      background-image: url("saraahmedbg.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 8vh;
+      transition: transform 1.2s cubic-bezier(.77, 0, .18, 1), opacity .8s ease;
+    }
+
+    .cover.hide {
+      transform: translate(-50%, -100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* =========================
+       OPEN BUTTON
+    ========================= */
+    .open-btn {
+      border: 1px solid #d7bd7c;
+      background: rgba(5, 20, 38, .88);
+      color: #e4ca8c;
+      padding: 14px 38px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-family: 'Amiri', serif;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 20px rgba(212, 177, 91, .2);
+      transition: .3s ease;
+    }
+
+    .open-btn:hover {
+      background: #d4b66e;
+      color: #07182b;
+      transform: translateY(-3px);
+    }
+
+    /* =========================
+       MUSIC BUTTON
+    ========================= */
+    .music-btn-container {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 450px;
+      height: 0;
+      z-index: 2000;
+    }
+
+    .music-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid #d7bd7c;
+      background: rgba(5, 20, 38, .85);
+      color: #e4ca8c;
+      font-size: 20px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(212, 177, 91, .2);
+    }
+
+    .music-button.show {
+      display: flex;
+    }
+
+    /* =========================
+       INVITATION BACKGROUND
+    ========================= */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 450px;
+      height: 100dvh;
+      z-index: 0;
+      background-image: url("saraahmed1.jpg");
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+    }
+
+    .background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 15, 29, .25);
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+    .content {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      margin: auto;
+      padding: 15vh 0 10vh;
+      text-align: center;
+    }
+
+    .bismillah {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 32px;
+      color: #d7b86d;
+      margin-bottom: 25px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .intro {
+      font-size: 18px;
+      line-height: 2;
+      color: #d9cb9d;
+      margin-bottom: 45px;
+    }
+
+    .names {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: clamp(55px, 15vw, 75px);
+      color: #f0b47c;
+      margin-bottom: 40px;
+      line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+    }
+
+    /* =========================
+       DETAILS
+    ========================= */
+    .details {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      margin-bottom: 60px;
+      background: rgba(4, 20, 38, .4);
+      border-radius: 15px;
+      padding: 15px 5px;
+      border: 1px solid rgba(158, 139, 86, 0.3);
+    }
+
+    .detail {
+      flex: 1;
+      padding: 5px;
+      border-left: 1px solid #9e8b56;
+    }
+
+    .detail:last-child { border-left: none; }
+
+    .icon {
+      font-size: 26px;
+      margin-bottom: 8px;
+      color: #c9b36f;
+    }
+
+    .detail-title {
+      font-size: 14px;
+      color: #d5c58d;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      font-size: 17px;
+      color: #eee2bb;
+      font-weight: bold;
+    }
+
+    /* =========================
+       COUNTDOWN
+    ========================= */
+    .countdown-title {
+      font-family: 'Aref Ruqaa', serif;
+      font-size: 28px;
+      color: #d6bc76;
+      margin-bottom: 25px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      direction: ltr;
+      margin-bottom: 60px;
+    }
+
+    .time-box {
+      min-width: 65px;
+      padding: 12px 5px;
+      border: 1px solid #9d8750;
+      background: rgba(4, 20, 38, .6);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+    }
+
+    .time-number {
+      font-size: 24px;
+      color: #f0d99b;
+      font-weight: bold;
+    }
+
+    .time-label {
+      font-size: 12px;
+      color: #bcae82;
+      margin-top: 5px;
+    }
+
+    /* =========================
+       SECTIONS (جديد)
+    ========================= */
+    .section {
+      padding: 40px 10px;
+      border-top: 1px dashed rgba(215, 184, 109, 0.3);
+      margin-bottom: 10px;
+    }
+
+    .section h2 {
+      font-family: 'Aref Ruqaa', serif;
+      color: #e0c684;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      color: #d6cda9;
+      line-height: 2;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    /* GPS - الخريطة */
+    .map-container iframe {
+      width: 100%;
+      height: 200px;
+      border: 2px solid #9e8b56 !important;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      filter: grayscale(20%) sepia(10%); /* إعطاء الخريطة طابع دافئ */
+    }
+
+    .location-btn {
+      display: inline-block;
+      padding: 12px 35px;
+      border: 1px solid #c9ad68;
+      border-radius: 30px;
+      color: #06182d;
+      background: #dfc782;
+      text-decoration: none;
+      font-weight: bold;
+      transition: .3s;
+      font-size: 16px;
+    }
+
+    .location-btn:hover {
+      background: transparent;
+      color: #dfc782;
+    }
+
+    /* معرض الصور */
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .gallery img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #9e8b56;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* الفيديو */
+    .video-container video {
+      width: 100%;
+      border-radius: 15px;
+      border: 2px solid #9e8b56;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* سجل التهاني */
+    .guestbook-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .guestbook-form input,
+    .guestbook-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #9e8b56;
+      background: rgba(4, 20, 38, .6);
+      color: #eee2bb;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .guestbook-form input::placeholder,
+    .guestbook-form textarea::placeholder {
+      color: rgba(188, 174, 130, 0.6);
+    }
+
+    .guestbook-form input:focus,
+    .guestbook-form textarea:focus {
+      background: rgba(4, 20, 38, .9);
+      border-color: #f0d99b;
+    }
+
+    .submit-btn {
+      padding: 14px;
+      background: #c9b36f;
+      color: #06182d;
+      border: none;
+      border-radius: 30px;
+      font-family: inherit;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .submit-btn:hover {
+      background: #e4ca8c;
+      transform: translateY(-2px);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="mobile-frame">
+
+    <!-- =========================
+         MUSIC
+    ========================= -->
+    <audio id="weddingMusic" loop>
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-btn-container">
+      <button class="music-button" id="musicButton" onclick="toggleMusic()">🎵</button>
+    </div>
+
+    <!-- =========================
+         COVER
+    ========================= -->
+    <div class="cover" id="cover">
+      <button class="open-btn" onclick="openInvitation()">افتحي الدعوة ✨</button>
+    </div>
+
+    <!-- =========================
+         INVITATION
+    ========================= -->
+    <main class="invitation">
+      
+      <div class="background"></div>
+
+      <div class="content">
+
+        <div class="bismillah">بسم الله الرحمن الرحيم</div>
+
+        <div class="intro">
+          بفضل من الله ورعايته يسرنا<br>
+          دعوتكم لمشاركتنا حفل زفاف
+        </div>
+
+        <div class="names">أحمد <br> & <br> سارة</div>
+
+        <!-- DETAILS -->
+        <div class="details">
+          <div class="detail">
+            <div class="icon">⌚</div>
+            <div class="detail-title">الساعة</div>
+            <div class="detail-value">السادسة</div>
+          </div>
+          <div class="detail">
+            <div class="icon">📅</div>
+            <div class="detail-title">اليوم</div>
+            <div class="detail-value">الجمعة</div>
+          </div>
+          <div class="detail">
+            <div class="icon">📍</div>
+            <div class="detail-title">قاعة</div>
+            <div class="detail-value">الأمل</div>
+          </div>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div class="countdown-title">باقي على فرحتنا</div>
+        <div class="countdown">
+          <div class="time-box">
+            <div class="time-number" id="days">00</div>
+            <div class="time-label">يوم</div>
+          </div>
+          <div class="time-box">
+            <div class="time-number" id="hours">00</div>
+            <div class="time-label">ساعة</div>
+          </div>
+          <div class="time-box">
+            <div class="time-number" id="minutes">00</div>
+            <div class="time-label">دقيقة</div>
+          </div>
+          <div class="time-box">
+            <div class="time-number" id="seconds">00</div>
+            <div class="time-label">ثانية</div>
+          </div>
+        </div>
+
+        <!-- LOCATION & GPS -->
+        <section class="section">
+          <h2>موقع الحفل</h2>
+          <p>يسعدنا وجودكم معنا لمشاركة أجمل لحظاتنا في قاعة الأمل.</p>
+          <div class="map-container">
+            <!-- كود خريطة جوجل (يمكنك تغييره برابط القاعة الحقيقي) -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.648213600983!2d31.233333999999996!3d30.04441999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzQwLjAiTiAzMcKwMTQnMDAuMCJF!5e0!3m2!1sar!2seg!4v1700000000000!5m2!1sar!2seg" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+          <a class="location-btn" href="https://maps.google.com" target="_blank">📍 افتح الخريطة (GPS)</a>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="section">
+          <h2>لحظاتنا السعيدة</h2>
+          <p>بعض اللقطات الجميلة</p>
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=400&q=80" alt="صورة زفاف 1">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=400&q=80" alt="صورة زفاف 2">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=400&q=80" alt="صورة زفاف 3">
+            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=400&q=80" alt="صورة زفاف 4">
+          </div>
+        </section>
+
+        <!-- VIDEO -->
+        <section class="section">
+          <h2>فيديو دعوتنا</h2>
+          <div class="video-container">
+            <!-- فيديو مؤقت (يمكنك تغييره باسم فيديو عندك أو رابط يوتيوب) -->
+            <video controls>
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+              متصفحك لا يدعم تشغيل الفيديو.
+            </video>
+          </div>
+        </section>
+
+        <!-- GUESTBOOK (تهنئة) -->
+        <section class="section">
+          <h2>سجل التهاني</h2>
+          <p>اترك لنا رسالة للذكرى تسعد قلوبنا ❤️</p>
+          <!-- فورم بسيط (يعطي رسالة شكر عند الضغط) -->
+          <form class="guestbook-form" onsubmit="event.preventDefault(); alert('تم إرسال التهنئة بنجاح! شكراً لمشاركتك فرحتنا.'); this.reset();">
+            <input type="text" placeholder="الاسم الكريم" required>
+            <textarea rows="4" placeholder="اكتب تهنئتك هنا..." required></textarea>
+            <button type="submit" class="submit-btn">إرسال التهنئة ✉️</button>
+          </form>
+        </section>
+
+      </div>
+    </main>
+
+  </div> <!-- إغلاق الـ mobile-frame -->
+
+  <script>
+    /* =========================
+       OPEN INVITATION
+    ========================= */
+    function openInvitation() {
+      const cover = document.getElementById("cover");
+      const music = document.getElementById("weddingMusic");
+      const musicButton = document.getElementById("musicButton");
+
+      cover.classList.add("hide");
+
+      /* تشغيل الموسيقى */
+      music.play().then(() => {
+        musicButton.classList.add("show");
+      }).catch(() => {
+        musicButton.classList.add("show");
+      });
+    }
+
+    /* =========================
+       MUSIC CONTROL
+    ========================= */
+    function toggleMusic() {
+      const music = document.getElementById("weddingMusic");
+      const button = document.getElementById("musicButton");
+
+      if (music.paused) {
+        music.play();
+        button.innerHTML = "🎵";
+      } else {
+        music.pause();
+        button.innerHTML = "🔇";
+      }
+    }
+
+    /* =========================
+       COUNTDOWN
+    ========================= */
+    const weddingDate = new Date("2026-08-28T18:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = weddingDate - now;
+
+      if (difference <= 0) {
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = String(days).padStart(2, "0");
+      document.getElementById("hours").innerText = String(hours).padStart(2, "0");
+      document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>

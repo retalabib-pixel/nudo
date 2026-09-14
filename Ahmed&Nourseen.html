@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>دعوة زفاف | Dr. Ahmed & Dr. Noursin</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Great+Vibes&family=Tajawal:wght@400;500;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* =====================================================
+            GENERAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #fcf8f2;
+            color: #4a3b32;
+            overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+        }
+
+        /* Background */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('bg.jpg?v=20260914');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(252, 248, 242, 0.12);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+            GATE / OPENING SCREEN
+        ===================================================== */
+
+        #gate-screen {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a110c;
+            overflow: hidden;
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        .gate {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3e2723,
+                    #1f110c
+                );
+
+            box-shadow:
+                inset 0 0 40px rgba(0,0,0,0.8);
+
+            transition:
+                transform 1.5s cubic-bezier(0.64, 0.04, 0.35, 1);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2005;
+        }
+
+        .gate-left {
+            left: 0;
+            border-right: 4px solid #d4af37;
+        }
+
+        .gate-right {
+            right: 0;
+            border-left: 4px solid #d4af37;
+        }
+
+        .gate::before {
+            content: '';
+            position: absolute;
+            top: 5%;
+            bottom: 5%;
+            left: 8%;
+            right: 8%;
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 10px;
+        }
+
+        .gate::after {
+            content: '';
+            position: absolute;
+            top: 8%;
+            bottom: 8%;
+            left: 15%;
+            right: 15%;
+            border: 1px dashed rgba(212,175,55,0.2);
+            border-radius: 10px;
+        }
+
+        .gate-lock {
+            position: absolute;
+            z-index: 2010;
+
+            width: 140px;
+            height: 140px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #dfbd5a,
+                    #aa8529
+                );
+
+            border: 3px solid #fff;
+            border-radius: 50%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            color: #3e2723;
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.7);
+
+            transition:
+                transform 0.4s,
+                opacity 0.5s;
+        }
+
+        .gate-lock:hover {
+            transform: scale(1.05);
+
+            box-shadow:
+                0 10px 45px rgba(212,175,55,0.6);
+        }
+
+        .gate-lock .initials {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .gate-lock .click-text {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.85rem;
+            font-weight: bold;
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseText {
+            0% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        .gate-open-left {
+            transform: translateX(-100%);
+        }
+
+        .gate-open-right {
+            transform: translateX(100%);
+        }
+
+        .lock-hide {
+            opacity: 0;
+            transform: scale(0.5);
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+            MUSIC FLOATING BUTTON
+        ===================================================== */
+
+        .music-control-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 1500;
+            background: #4a3b32;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .music-control-btn:hover {
+            transform: scale(1.1);
+            background: #d4af37;
+            color: #4a3b32;
+        }
+
+
+        /* =====================================================
+            MAIN CONTENT
+        ===================================================== */
+
+        #main-content {
+            display: none;
+            padding: 40px 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            background-color: rgba(255,255,255,0.92);
+
+            width: 100%;
+            max-width: 700px;
+
+            margin: 0 auto;
+
+            padding: 60px 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.1);
+
+            border-radius: 25px;
+
+            min-height: 100vh;
+
+            border:
+                1px solid rgba(212,175,55,0.4);
+        }
+
+
+        /* =====================================================
+            COUPLE IMAGE
+        ===================================================== */
+
+        .couple-img-wrapper {
+            text-align: center;
+        }
+
+        .couple-img {
+            width: 240px;
+            height: 240px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 8px solid #fff;
+
+            padding: 5px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.1);
+
+            background: #d4af37;
+        }
+
+
+        /* =====================================================
+            TEXT
+        ===================================================== */
+
+        .names {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            color: #4a3b32;
+            margin: 10px 0;
+
+            text-shadow:
+                1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .invitation-text {
+            font-family: 'Amiri', serif;
+
+            font-size: 1.5rem;
+
+            line-height: 1.8;
+
+            color: #5d4a40;
+
+            margin: 20px;
+
+            font-style: italic;
+        }
+
+
+        /* =====================================================
+            DIVIDER
+        ===================================================== */
+
+        .divider {
+            font-size: 2rem;
+            color: #d4af37;
+
+            margin: 30px 0;
+
+            text-align: center;
+
+            letter-spacing: 10px;
+        }
+
+
+        /* =====================================================
+            SECTION TITLES
+        ===================================================== */
+
+        .section-title {
+            font-family: 'Tajawal', sans-serif;
+
+            font-size: 2.2rem;
+
+            color: #4a3b32;
+
+            margin: 40px 0 20px;
+
+            display: inline-block;
+
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+
+            position: absolute;
+
+            width: 50%;
+            height: 3px;
+
+            background: #d4af37;
+
+            bottom: -10px;
+
+            left: 25%;
+
+            border-radius: 5px;
+        }
+
+
+        /* =====================================================
+            STORY
+        ===================================================== */
+
+        .story-box {
+            background: rgba(255,255,255,0.7);
+
+            padding: 30px 20px;
+
+            border-radius: 15px;
+
+            border-right: 4px solid #d4af37;
+            border-left: 4px solid #d4af37;
+
+            margin: 30px 0;
+
+            font-size: 1.1rem;
+
+            line-height: 1.9;
+
+            color: #5d4a40;
+        }
+
+
+        /* =====================================================
+            COUNTDOWN
+        ===================================================== */
+
+        .countdown-wrapper {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin: 40px 0;
+
+            direction: ltr;
+        }
+
+        .time-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f9ede7,
+                    #f4dcd6
+                );
+
+            color: #4a3b32;
+
+            padding: 20px 15px;
+
+            border-radius: 15px;
+
+            min-width: 80px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.05);
+
+            border:
+                1px solid rgba(212,175,55,0.5);
+        }
+
+        .time-box span {
+            display: block;
+
+            font-size: 2.5rem;
+
+            font-weight: bold;
+
+            font-family: 'Playfair Display', serif;
+
+            margin-bottom: 5px;
+        }
+
+        .time-box small {
+            font-size: 1rem;
+
+            font-family: 'Tajawal', sans-serif;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+            PHOTO GALLERY
+        ===================================================== */
+
+        .photo-gallery {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+
+            margin: 30px 0;
+        }
+
+        .photo-gallery img {
+            width: 45%;
+
+            height: 250px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            border: 6px solid #fff;
+
+            box-shadow:
+                0 6px 15px rgba(0,0,0,0.1);
+
+            transform: rotate(-2deg);
+
+            transition: 0.3s;
+
+            background: #f5f5f5;
+        }
+
+        .photo-gallery img:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .photo-gallery img:hover {
+            transform:
+                scale(1.05)
+                rotate(0deg);
+
+            z-index: 10;
+        }
+
+
+        /* =====================================================
+            VIDEO
+        ===================================================== */
+
+        .video-wrapper {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        video {
+            display: block;
+
+            width: 100%;
+
+            max-width: 100%;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.1);
+
+            border: 4px solid #fff;
+
+            background: #000;
+        }
+
+
+        /* =====================================================
+            LOCATION
+        ===================================================== */
+
+        .location-box {
+            text-align: center;
+
+            background:
+                rgba(255,255,255,0.7);
+
+            padding: 25px 15px;
+
+            border-radius: 15px;
+
+            margin-top: 20px;
+        }
+
+        .location-btn {
+            display: inline-block;
+
+            background-color: #d4af37;
+
+            color: #fff;
+
+            padding: 14px 30px;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-size: 1.1rem;
+
+            font-family: 'Tajawal', sans-serif;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .location-btn:hover {
+            background-color: #4a3b32;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+            GUESTBOOK
+        ===================================================== */
+
+        .guestbook-form {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+
+            background:
+                rgba(255,255,255,0.85);
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .guestbook-form input,
+        .guestbook-form textarea {
+            width: 100%;
+
+            padding: 15px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius: 8px;
+
+            font-family: 'Tajawal', sans-serif;
+
+            font-size: 1rem;
+
+            background: #fff;
+
+            transition: 0.3s;
+
+            color: #4a3b32;
+
+            resize: vertical;
+        }
+
+        .guestbook-form input:focus,
+        .guestbook-form textarea:focus {
+            border-color: #d4af37;
+
+            outline: none;
+
+            box-shadow:
+                0 0 0 2px rgba(212,175,55,0.12);
+        }
+
+        .guestbook-form button {
+            background-color: #4a3b32;
+
+            color: #d4af37;
+
+            border: none;
+
+            padding: 15px;
+
+            font-size: 1.2rem;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-family: 'Tajawal', sans-serif;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .guestbook-form button:hover {
+            background-color: #d4af37;
+
+            color: #4a3b32;
+        }
+
+        .guestbook-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #messages-container {
+            text-align: right;
+        }
+
+        .message-card {
+            background:
+                rgba(255,255,255,0.95);
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            margin-bottom: 15px;
+
+            border-right: 5px solid #d4af37;
+
+            box-shadow:
+                0 4px 10px rgba(0,0,0,0.05);
+
+            word-wrap: break-word;
+        }
+
+        .message-card h4 {
+            margin: 0 0 8px 0;
+
+            color: #4a3b32;
+
+            font-size: 1.2rem;
+        }
+
+        .message-card p {
+            margin: 0;
+
+            color: #6e5c53;
+
+            line-height: 1.7;
+
+            white-space: pre-wrap;
+        }
+
+        .empty-messages {
+            text-align: center;
+
+            color: #6e5c53;
+
+            padding: 20px;
+        }
+
+
+        /* =====================================================
+            FOOTER / NUDO INSTAGRAM
+        ===================================================== */
+
+        .footer-branding {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212,175,55,0.2);
+        }
+
+        .nudo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #4a3b32;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nudo-link:hover {
+            color: #d4af37;
+        }
+
+
+        /* =====================================================
+            MOBILE
+        ===================================================== */
+
+        @media (max-width: 768px) {
+
+            #main-content {
+                padding: 15px 8px;
+            }
+
+            .container {
+                width: 100%;
+
+                margin: 0 auto;
+
+                padding: 30px 12px;
+
+                border-radius: 20px;
+            }
+
+            .names {
+                font-size: 2.5rem;
+            }
+
+            .invitation-text {
+                font-size: 1.25rem;
+                margin: 15px 8px;
+            }
+
+            .couple-img {
+                width: 190px;
+                height: 190px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .story-box {
+                font-size: 1rem;
+                padding: 25px 15px;
+            }
+
+            .countdown-wrapper {
+                gap: 6px;
+                margin: 25px 0;
+            }
+
+            .time-box {
+                min-width: 0;
+                width: 23%;
+
+                padding: 10px 4px;
+
+                border-radius: 10px;
+            }
+
+            .time-box span {
+                font-size: 1.6rem;
+                margin-bottom: 2px;
+            }
+
+            .time-box small {
+                font-size: 0.72rem;
+                letter-spacing: 0;
+            }
+
+            .photo-gallery {
+                gap: 10px;
+            }
+
+            .photo-gallery img {
+                width: 46%;
+                height: 190px;
+                border-width: 4px;
+            }
+
+            .gate-lock {
+                width: 120px;
+                height: 120px;
+            }
+
+            .gate-lock .initials {
+                font-size: 2.4rem;
+            }
+
+            .gate-lock .click-text {
+                font-size: 0.75rem;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         WEDDING MUSIC
+    ====================================================== -->
+
+    <audio id="wedding-music" loop preload="auto">
+        <source src="music.mp3?v=20260914" type="audio/mpeg">
+    </audio>
+
+    <!-- MUSIC FLOATING BUTTON -->
+    <button class="music-control-btn" id="music-toggle-btn" onclick="toggleMusic()" title="التحكم بالموسيقى">
+        🎵
+    </button>
+
+
+    <!-- =====================================================
+         GATE SCREEN
+    ====================================================== -->
+
+    <div id="gate-screen">
+
+        <div
+            class="gate gate-left"
+            id="gate-left">
+        </div>
+
+        <div
+            class="gate gate-right"
+            id="gate-right">
+        </div>
+
+        <div
+            class="gate-lock"
+            id="gate-lock"
+            onclick="openInvitation()">
+
+            <span class="initials">
+                A&N
+            </span>
+
+            <span class="click-text">
+                افتح البوابة
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div id="main-content">
+
+        <div class="container">
+
+
+            <!-- COUPLE PHOTO -->
+
+            <div class="couple-img-wrapper">
+
+                <img
+                    src="couple.webp?v=20260914"
+                    alt="Ahmed and Noursin"
+                    class="couple-img"
+                    loading="eager"
+                >
+
+            </div>
+
+
+            <!-- INTRO -->
+
+            <div style="text-align:center;">
+
+                <div class="invitation-text">
+
+                    "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"
+
+                    <br><br>
+
+                    بكل الحب، نتشرف بدعوتكم لمشاركتنا فرحة عمرنا وتوثيق أجمل لحظات حياتنا بحضوركم الكريم.
+
+                </div>
+
+
+                <h1 class="names">
+                    د. أحمد & د. نورسين
+                </h1>
+
+
+                <p
+                    style="
+                        font-size:1.4rem;
+                        color:#4a3b32;
+                        font-weight:bold;
+                        margin-top:5px;
+                    "
+                >
+                    الأربعاء، 16 سبتمبر 2026
+                </p>
+
+
+                <div class="divider">
+                    ✧ ✧ ✧
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STORY
+            ================================================== -->
+
+            <div style="text-align:center;">
+
+                <h2 class="section-title">
+                    قصة حبنا
+                </h2>
+
+            </div>
+
+
+            <div class="story-box">
+
+                نظرة، فابتسامة، فحديث.. هكذا بدأت حكايتنا.
+
+                التقينا صدفة، ومنذ تلك اللحظة عرفنا أن قلبينا قد وجدا مسكنهما.
+
+                مررنا بأيام جميلة، ضحكنا، وتشاركنا الأحلام والطموحات.
+
+                واليوم، نكلل قصة حبنا بجمعنا تحت سقف واحد، لنبدأ فصلاً جديداً من حياتنا معاً يملأه الود والرحمة.
+
+            </div>
+
+
+            <!-- =================================================
+                 COUNTDOWN
+            ================================================== -->
+
+            <div style="text-align:center;">
+
+                <h2 class="section-title">
+                    باقي على الفرح
+                </h2>
+
+
+                <div
+                    class="countdown-wrapper"
+                    id="countdown"
+                >
+
+                    <div class="time-box">
+
+                        <span id="days">
+                            00
+                        </span>
+
+                        <small>
+                            يوم
+                        </small>
+
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <span id="hours">
+                            00
+                        </span>
+
+                        <small>
+                            ساعة
+                        </small>
+
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <span id="minutes">
+                            00
+                        </span>
+
+                        <small>
+                            دقيقة
+                        </small>
+
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <span id="seconds">
+                            00
+                        </span>
+
+                        <small>
+                            ثانية
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="divider">
+                    ✧ ✧ ✧
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PHOTO GALLERY
+            ================================================== -->
+
+            <div style="text-align:center;">
+
+                <h2 class="section-title">
+                    أجمل لحظاتنا
+                </h2>
+
+            </div>
+
+
+            <div class="photo-gallery">
+
+                <!-- CACHE BUSTER v=20260914 -->
+
+                <img
+                    src="Image A&N 1.jpg?v=20260914"
+                    alt="أجمل لحظات أحمد ونورسين"
+                    loading="lazy"
+                >
+
+                <img
+                    src="Image A&N 2.jpg?v=20260914"
+                    alt="أجمل لحظات أحمد ونورسين"
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <!-- =================================================
+                 VIDEO
+            ================================================== -->
+
+            <div style="text-align:center;">
+
+                <h2 class="section-title">
+                    فيديو العروسين
+                </h2>
+
+            </div>
+
+
+            <div class="video-wrapper">
+
+                <video
+                    id="wedding-video"
+                    controls
+                    playsinline
+                    webkit-playsinline
+                    preload="metadata"
+                >
+
+                    <source
+                        src="Video A&N.mp4?v=20260914"
+                        type="video/mp4"
+                    >
+
+                    عذراً، متصفح هاتفك لا يدعم تشغيل هذا الفيديو.
+
+                </video>
+
+            </div>
+
+
+            <div class="divider">
+                ✧ ✧ ✧
+            </div>
+
+
+            <!-- =================================================
+                 LOCATION
+            ================================================== -->
+
+            <div style="text-align:center;">
+
+                <h2 class="section-title">
+                    موقع الحفل
+                </h2>
+
+            </div>
+
+
+            <div class="location-box">
+
+                <p
+                    style="
+                        color:#6e5c53;
+                        font-size:1.15rem;
+                        margin-top:0;
+                    "
+                >
+                    قاعة Grand Hall
+                </p>
+
+
+                <p
+                    style="
+                        color:#6e5c53;
+                        line-height:1.8;
+                    "
+                >
+                    نتشرف بوجودكم معنا للاحتفال بأجمل يوم في حياتنا 🤍
+                </p>
+
+
+                <!-- YOUR GOOGLE MAPS LINK -->
+
+                <a
+                    href="https://maps.app.goo.gl/WQRhCqBmdBDzN2t58?g_st=ic"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="location-btn"
+                >
+                    📍 افتح موقع الحفل على Google Maps
+                </a>
+
+            </div>
+
+
+            <div class="divider">
+                ✧ ✧ ✧
+            </div>
+
+
+            <!-- =================================================
+                 GUESTBOOK
+            ================================================== -->
+
+            <div style="text-align:center;">
+
+                <h2 class="section-title">
+                    سجل التهاني
+                </h2>
+
+            </div>
+
+
+            <p
+                style="
+                    text-align:center;
+                    color:#6e5c53;
+                    line-height:1.8;
+                "
+            >
+                اتركوا لنا ذكرى جميلة من قلوبكم في يومنا المميز.
+            </p>
+
+
+            <div class="guestbook-form">
+
+                <input
+                    type="text"
+                    id="guest-name"
+                    placeholder="الاسم الكريم"
+                    maxlength="100"
+                    autocomplete="name"
+                >
+
+
+                <textarea
+                    id="guest-message"
+                    rows="4"
+                    placeholder="اكتب أمنياتك وتهنئتك للعروسين..."
+                    maxlength="1000"
+                ></textarea>
+
+
+                <button
+                    id="send-message-btn"
+                    onclick="addMessage()"
+                >
+                    إرسال التهنئة
+                </button>
+
+            </div>
+
+
+            <div id="messages-container">
+
+                <p class="empty-messages">
+                    جاري تحميل التهاني... 🤍
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 FOOTER / NUDO INSTAGRAM
+            ================================================== -->
+            <div class="footer-branding">
+                <a href="https://www.instagram.com/nudo1studio?stkn=eDY2eW00cjJjaGh5&utm_source=qr" target="_blank" rel="noopener noreferrer" class="nudo-link">
+                    ✨ Crafted with love by Nudo Studio
+                </a>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FIREBASE
+    ===================================================== -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            push,
+            onValue
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+
+        /* =====================================================
+            FIREBASE CONFIG
+        ===================================================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyCA6Y6YKz-m361zK6q_HviR-D7Qs088QWQ",
+
+            authDomain:
+                "ahmednourseen-nudo.firebaseapp.com",
+
+            projectId:
+                "ahmednourseen-nudo",
+
+            storageBucket:
+                "ahmednourseen-nudo.firebasestorage.app",
+
+            messagingSenderId:
+                "974005691313",
+
+            appId:
+                "1:974005691313:web:ac34a9d0eaf7ac81635390",
+
+            measurementId:
+                "G-JM857RF7S4"
+        };
+
+
+        /* =====================================================
+            INITIALIZE FIREBASE
+        ===================================================== */
+
+        const app =
+            initializeApp(firebaseConfig);
+
+
+        const db =
+            getDatabase(app);
+
+
+        const messagesRef =
+            ref(
+                db,
+                "invitations/ahmed-noursin/guestbook"
+            );
+
+
+
+        /* =====================================================
+            OPEN INVITATION & MUSIC TOGGLE
+        ===================================================== */
+
+        window.openInvitation = function () {
+
+            const gateScreen =
+                document.getElementById("gate-screen");
+
+            const leftGate =
+                document.getElementById("gate-left");
+
+            const rightGate =
+                document.getElementById("gate-right");
+
+            const lock =
+                document.getElementById("gate-lock");
+
+            const music =
+                document.getElementById("wedding-music");
+
+
+            /* Start music after user interaction */
+
+            music.volume = 0.45;
+
+            music.play().catch((error) => {
+
+                console.log(
+                    "المتصفح منع تشغيل الموسيقى:",
+                    error
+                );
+
+            });
+
+
+            /* Hide lock */
+
+            lock.classList.add("lock-hide");
+
+
+            /* Open gates */
+
+            leftGate.classList.add("gate-open-left");
+
+            rightGate.classList.add("gate-open-right");
+
+
+            /* Show invitation */
+
+            document.getElementById(
+                "main-content"
+            ).style.display = "block";
+
+
+            /* Fade gate */
+
+            setTimeout(() => {
+
+                gateScreen.style.opacity = "0";
+
+            }, 100);
+
+
+            /* Remove gate completely */
+
+            setTimeout(() => {
+
+                gateScreen.style.display = "none";
+
+            }, 1700);
+
+        };
+
+        window.toggleMusic = function() {
+            const music = document.getElementById("wedding-music");
+            const btn = document.getElementById("music-toggle-btn");
+            if (music.paused) {
+                music.play();
+                btn.textContent = "🎵";
+            } else {
+                music.pause();
+                btn.textContent = "🔇";
+            }
+        };
+
+
+
+        /* =====================================================
+            COUNTDOWN
+        ===================================================== */
+
+        const weddingDate =
+            new Date(
+                "September 16, 2026 20:00:00"
+            ).getTime();
+
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+
+            const distance =
+                weddingDate - now;
+
+
+            const countdown =
+                document.getElementById("countdown");
+
+
+            if (distance <= 0) {
+
+                countdown.innerHTML = `
+                    <h3
+                        style="
+                            color:#4a3b32;
+                            font-size:1.8rem;
+                            font-family:Tajawal;
+                            line-height:1.8;
+                        "
+                    >
+                        اليوم هو أجمل أيام العمر!
+                        <br>
+                        تم الزفاف بحمد الله 🤍
+                    </h3>
+                `;
+
+                return;
+
+            }
+
+
+            const days =
+                Math.floor(
+                    distance /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (distance %
+                    (1000 * 60 * 60 * 24)) /
+                    (1000 * 60 * 60)
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (distance %
+                    (1000 * 60 * 60)) /
+                    (1000 * 60)
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (distance %
+                    (1000 * 60)) /
+                    1000
+                );
+
+
+            document.getElementById("days")
+                .textContent =
+                String(days).padStart(2, "0");
+
+
+            document.getElementById("hours")
+                .textContent =
+                String(hours).padStart(2, "0");
+
+
+            document.getElementById("minutes")
+                .textContent =
+                String(minutes).padStart(2, "0");
+
+
+            document.getElementById("seconds")
+                .textContent =
+                String(seconds).padStart(2, "0");
+
+        }
+
+
+        updateCountdown();
+
+
+        const countdownTimer =
+            setInterval(
+                updateCountdown,
+                1000
+            );
+
+
+
+        /* =====================================================
+            GUESTBOOK - ADD MESSAGE
+        ===================================================== */
+
+        window.addMessage = async function () {
+
+            const nameInput =
+                document.getElementById("guest-name");
+
+            const textInput =
+                document.getElementById("guest-message");
+
+            const button =
+                document.getElementById("send-message-btn");
+
+
+            const name =
+                nameInput.value.trim();
+
+            const text =
+                textInput.value.trim();
+
+
+            /* Validation */
+
+            if (!name || !text) {
+
+                alert(
+                    "برجاء كتابة الاسم والرسالة عشان تفضل ذكرى حلوة 🤍"
+                );
+
+                return;
+
+            }
+
+
+            /* Prevent double clicking */
+
+            button.disabled = true;
+
+            button.textContent =
+                "جاري الإرسال...";
+
+
+            try {
+
+                await push(
+                    messagesRef,
+                    {
+                        name: name,
+                        text: text,
+                        timestamp: Date.now()
+                    }
+                );
+
+
+                /* Clear inputs */
+
+                nameInput.value = "";
+
+                textInput.value = "";
+
+
+                alert(
+                    "تم إرسال تهنئتك بنجاح 🤍"
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Firebase error:",
+                    error
+                );
+
+
+                alert(
+                    "حصل خطأ أثناء إرسال التهنئة. تأكدي من إعدادات Firebase وRealtime Database."
+                );
+
+            } finally {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "إرسال التهنئة";
+
+            }
+
+        };
+
+
+
+        /* =====================================================
+            GUESTBOOK - DISPLAY MESSAGES
+        ===================================================== */
+
+        onValue(
+
+            messagesRef,
+
+            (snapshot) => {
+
+                const container =
+                    document.getElementById(
+                        "messages-container"
+                    );
+
+
+                /* Clear old messages */
+
+                container.innerHTML = "";
+
+
+                const data =
+                    snapshot.val();
+
+
+                /* No messages */
+
+                if (!data) {
+
+                    const empty =
+                        document.createElement("p");
+
+                    empty.className =
+                        "empty-messages";
+
+                    empty.textContent =
+                        "كونوا أول المهنئين للعروسين! 🤍";
+
+                    container.appendChild(empty);
+
+                    return;
+
+                }
+
+
+                /* Convert Firebase object to array */
+
+                const messages =
+                    Object.values(data)
+                    .sort(
+                        (a, b) =>
+                            (b.timestamp || 0) -
+                            (a.timestamp || 0)
+                    );
+
+
+                /* Display */
+
+                messages.forEach((msg) => {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "message-card";
+
+
+                    const name =
+                        document.createElement("h4");
+
+                    name.textContent =
+                        msg.name || "ضيف كريم";
+
+
+                    const message =
+                        document.createElement("p");
+
+                    message.textContent =
+                        msg.text || "";
+
+
+                    card.appendChild(name);
+
+                    card.appendChild(message);
+
+                    container.appendChild(card);
+
+                });
+
+            },
+
+            (error) => {
+
+                console.error(
+                    "Firebase read error:",
+                    error
+                );
+
+
+                const container =
+                    document.getElementById(
+                        "messages-container"
+                    );
+
+
+                container.innerHTML = "";
+
+
+                const errorMessage =
+                    document.createElement("p");
+
+                errorMessage.className =
+                    "empty-messages";
+
+                errorMessage.textContent =
+                    "تعذر تحميل سجل التهاني حاليًا 🤍";
+
+
+                container.appendChild(
+                    errorMessage
+                );
+
+            }
+
+        );
+
+
+
+        /* =====================================================
+            IMAGE / VIDEO ERROR DETECTION
+        ===================================================== */
+
+        document
+            .querySelectorAll("img")
+            .forEach((img) => {
+
+                img.addEventListener(
+                    "error",
+                    () => {
+
+                        console.error(
+                            "لم يتم العثور على الصورة:",
+                            img.src
+                        );
+
+                    }
+                );
+
+            });
+
+
+        const weddingVideo =
+            document.getElementById(
+                "wedding-video"
+            );
+
+
+        weddingVideo.addEventListener(
+            "error",
+            () => {
+
+                console.error(
+                    "لم يتم تحميل فيديو العروسين."
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
